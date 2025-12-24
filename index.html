@@ -136,7 +136,7 @@
         .body-copy-style {
             font-size: clamp(1.8rem, 4vw, 3rem); 
             font-weight: 900;
-            color: rgba(255, 255, 255, 0.9);
+            color: #ffffff; /* 純白色 */
             letter-spacing: -0.02em;
             line-height: 1.25;
             text-align: center;
@@ -171,11 +171,12 @@
         .case-reveal-odd { transition-duration: 1.2s; }
         .case-reveal-even { transition-duration: 1.6s; transition-delay: 0.2s; }
 
-        /* 核心文案橫向 15s 滑入 - 移動端優化偏移量以防止溢出 */
+        /* 核心文案橫向滑入 - 透明度 1.5 秒，位移 15 秒 */
         .slide-reveal-horizontal {
             opacity: 0;
             transform: translateX(30px); 
-            transition: all 15s cubic-bezier(0.16, 1, 0.3, 1);
+            /* 分離動畫時間：opacity 在 1.5s 內完成，transform 維持 15s */
+            transition: transform 15s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.5s ease-out;
             will-change: transform, opacity;
         }
         @media (min-width: 768px) {
@@ -222,7 +223,7 @@
         ::-webkit-scrollbar-thumb { background: #333; }
     </style>
 </head>
-<body class="film-grain overflow-x-hidden w-full">
+<body class="film-grain overflow-x-hidden w-full text-white">
 
     <!-- 導航欄 -->
     <nav class="nav-editorial fixed top-0 w-full z-[100] py-6 dynamic-padding flex justify-between items-center">
@@ -242,7 +243,7 @@
         </div>
     </header>
 
-    <!-- Section 2: Body Copy 1 (橫向 15s 滑入) -->
+    <!-- Section 2: Body Copy 1 (橫向滑入，1.5s 變白，15s 滑行) -->
     <section class="py-[50vh] flex flex-col items-center dynamic-padding border-t border-white/5 overflow-hidden">
         <div class="max-w-4xl slide-reveal-horizontal">
             <p class="body-copy-style text-pretty">
@@ -255,9 +256,9 @@
     </section>
 
     <!-- Section 3: Selected Works -->
-    <section id="projects" class="pb-0 border-t border-white/5 dynamic-padding overflow-hidden">
+    <section id="projects" class="pb-0 border-t border-white/5 dynamic-padding overflow-hidden text-left">
         <div class="reveal pt-20 flex flex-col items-center mb-[50vh]">
-            <h2 class="title-monolith leading-none">
+            <h2 class="title-monolith leading-none text-center">
                 SELECTED<br>
                 <span class="stroke-text">WORKS.</span>
             </h2>
@@ -272,7 +273,7 @@
                         <span class="text-[10px] md:text-xs font-medium uppercase tracking-widest text-[#86868b]">Samsung · Integrated Campaign</span>
                         <span class="text-[10px] md:text-xs border border-white/10 px-2 py-0.5 rounded opacity-20">01</span>
                     </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase">Unfold An Era</h3>
+                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">Unfold An Era</h3>
                     <p class="case-description text-sm md:text-base text-[#86868b] leading-relaxed text-pretty text-center">Samsung's largest promotional campaign featuring MIRROR, redefining the brand's presence in the digital age.</p>
                     <a href="https://drive.google.com/file/d/1wrZrxTB3UuLahXmldTf51NbAp3IeOChL/view?usp=drive_link" target="_blank" class="text-xs md:text-sm font-bold uppercase tracking-widest text-white hover:text-[#ffaa00] transition-colors mt-auto"><span class="underline underline-offset-8">Watch →</span></a>
                 </div>
@@ -286,7 +287,7 @@
                         <span class="text-[10px] md:text-xs font-medium uppercase tracking-widest text-[#86868b]">Samsung · Branded Content</span>
                         <span class="text-[10px] md:text-xs border border-white/10 px-2 py-0.5 rounded opacity-20">02</span>
                     </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase">Imaging Reimagined</h3>
+                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">Imaging Reimagined</h3>
                     <p class="case-description text-sm md:text-base text-[#86868b] leading-relaxed text-pretty text-center">Collaborating with Hins Cheung to create a "Mobile Film", showcasing cutting-edge smartphone imaging.</p>
                     <a href="https://drive.google.com/file/d/1CHRnx4xG5Z7Sx4PxYwTPcjU9JWwtWlXs/view?usp=drive_link" target="_blank" class="text-xs md:text-sm font-bold uppercase tracking-widest text-white hover:text-[#ffaa00] transition-colors mt-auto"><span class="underline underline-offset-8">Watch →</span></a>
                 </div>
@@ -300,7 +301,7 @@
                         <span class="text-[10px] md:text-xs font-medium uppercase tracking-widest text-[#86868b]">Maxim's · Brand Film</span>
                         <span class="text-[10px] md:text-xs border border-white/10 px-2 py-0.5 rounded opacity-20">03</span>
                     </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase">The Longing Heart</h3>
+                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">The Longing Heart</h3>
                     <p class="case-description text-sm md:text-base text-[#86868b] leading-relaxed text-pretty text-center">An emotional mini-film portraying a daughter's longing for her father, emphasizing family reunions.</p>
                     <a href="https://drive.google.com/file/d/1f049ntfiTD1TW44xJoZr5maKTqRSuyli/view?usp=drive_link" target="_blank" class="text-xs md:text-sm font-bold uppercase tracking-widest text-white hover:text-[#ffaa00] transition-colors mt-auto"><span class="underline underline-offset-8">Watch →</span></a>
                 </div>
@@ -314,7 +315,7 @@
                         <span class="text-[10px] md:text-xs font-medium uppercase tracking-widest text-[#86868b]">Maxim's · Animated Commercial</span>
                         <span class="text-[10px] md:text-xs border border-white/10 px-2 py-0.5 rounded opacity-20">04</span>
                     </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase">Festive Spirit Animated</h3>
+                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">Festive Spirit Animated</h3>
                     <p class="case-description text-sm md:text-base text-[#86868b] leading-relaxed text-pretty text-center">Collaborated with a Japanese animation studio to create a high-quality CNY ad for Hong Kong.</p>
                     <a href="https://drive.google.com/file/d/1XmiX2qTG5LX1cGZol1JRoAXZcrmkx-1m/view?usp=drive_link" target="_blank" class="text-xs md:text-sm font-bold uppercase tracking-widest text-white hover:text-[#ffaa00] transition-colors mt-auto"><span class="underline underline-offset-8">Watch →</span></a>
                 </div>
@@ -328,7 +329,7 @@
                         <span class="text-[10px] md:text-xs font-medium uppercase tracking-widest text-[#86868b]">Hang Seng · Thematic Campaign</span>
                         <span class="text-[10px] md:text-xs border border-white/10 px-2 py-0.5 rounded opacity-20">05</span>
                     </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-pretty">Chief Family Officer</h3>
+                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">Chief Family Officer</h3>
                     <p class="case-description text-sm md:text-base text-[#86868b] leading-relaxed text-pretty text-center">Featuring Sandra Ng and her family, promoting Prestige Family+ services.</p>
                     <a href="https://drive.google.com/file/d/1igfEBW1BElEz6Eu6XIpsZqBPoZQRZrYf/view?usp=drive_link" target="_blank" class="text-xs md:text-sm font-bold uppercase tracking-widest text-white hover:text-[#ffaa00] transition-colors mt-auto"><span class="underline underline-offset-8">Watch →</span></a>
                 </div>
@@ -342,7 +343,7 @@
                         <span class="text-[10px] md:text-xs font-medium uppercase tracking-widest text-[#86868b]">HSBC · Thematic Campaign</span>
                         <span class="text-[10px] md:text-xs border border-white/10 px-2 py-0.5 rounded opacity-20">06</span>
                     </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-pretty">Premier Excellence</h3>
+                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">Premier Excellence</h3>
                     <p class="case-description text-sm md:text-base text-[#86868b] leading-relaxed text-pretty text-center">Targeting high-net-worth individuals to drive strategic growth among elite segments.</p>
                     <a href="https://drive.google.com/file/d/1ATPOF6SPxRdBiomDT9j3LhJ5OKL1vuIl/view?usp=drive_link" target="_blank" class="text-xs md:text-sm font-bold uppercase tracking-widest text-white hover:text-[#ffaa00] transition-colors mt-auto"><span class="underline underline-offset-8">Watch →</span></a>
                 </div>
@@ -356,7 +357,7 @@
                         <span class="text-[10px] md:text-xs font-medium uppercase tracking-widest text-[#86868b]">Prudential · Integrated</span>
                         <span class="text-[10px] md:text-xs border border-white/10 px-2 py-0.5 rounded opacity-20">07</span>
                     </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-pretty">A Human Promise</h3>
+                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">A Human Promise</h3>
                     <p class="case-description text-sm md:text-base text-[#86868b] leading-relaxed text-pretty text-center">Featuring Terence Lam, distilling the brief into a human promise.</p>
                     <a href="https://drive.google.com/file/d/1Vki7-prFtcPOpWru72hMubrfbI8JR8HZ/view?usp=drive_link" target="_blank" class="text-xs md:text-sm font-bold uppercase tracking-widest text-white hover:text-[#ffaa00] transition-colors mt-auto"><span class="underline underline-offset-8">Watch →</span></a>
                 </div>
@@ -370,7 +371,7 @@
                         <span class="text-[10px] md:text-xs font-medium uppercase tracking-widest text-[#86868b]">TamJai · Anniversary Campaign</span>
                         <span class="text-[10px] md:text-xs border border-white/10 px-2 py-0.5 rounded opacity-20">08</span>
                     </div>
-                    <h3 class="text-2xl md:text-3 font-black mb-4 uppercase text-pretty">Keep on Spicing Up</h3>
+                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">Keep on Spicing Up</h3>
                     <p class="case-description text-sm md:text-base text-[#86868b] leading-relaxed text-pretty text-center">Celebrating a legacy of local flavor and perseverance.</p>
                     <a href="https://drive.google.com/file/d/16N7mWfCL_-3SWcNWwowN7L5NsHasgg23/view?usp=drive_link" target="_blank" class="text-xs md:text-sm font-bold uppercase tracking-widest text-white hover:text-[#ffaa00] transition-colors mt-auto"><span class="underline underline-offset-8">Watch →</span></a>
                 </div>
@@ -384,7 +385,7 @@
                         <span class="text-[10px] md:text-xs font-medium uppercase tracking-widest text-[#86868b]">TamJai SamGor · Branded MV</span>
                         <span class="text-[10px] md:text-xs border border-white/10 px-2 py-0.5 rounded opacity-20">09</span>
                     </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-pretty">Never Say Never</h3>
+                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">Never Say Never</h3>
                     <p class="case-description text-sm md:text-base text-[#86868b] leading-relaxed text-pretty text-center">Jeffrey Ngai music video shot in Japan, injecting fresh appeal.</p>
                     <a href="https://drive.google.com/file/d/1Qwk88B7mV4eJmeQI3UmLj0nftvFEk7fT/view?usp=drive_link" target="_blank" class="text-xs md:text-sm font-bold uppercase tracking-widest text-white hover:text-[#ffaa00] transition-colors mt-auto"><span class="underline underline-offset-8">Watch →</span></a>
                 </div>
@@ -398,7 +399,7 @@
                         <span class="text-[10px] md:text-xs font-medium uppercase tracking-widest text-[#86868b]">Ocean Park · Campaign Film</span>
                         <span class="text-[10px] md:text-xs border border-white/10 px-2 py-0.5 rounded opacity-20">10</span>
                     </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-pretty">Exhilarating Spookiness</h3>
+                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">Exhilarating Spookiness</h3>
                     <p class="case-description text-sm md:text-base text-[#86868b] leading-relaxed text-pretty text-center">Capturing the exhilarating essence of Halloween at Ocean Park.</p>
                     <a href="https://drive.google.com/file/d/17Ox2akvC1h9QOArMKsZiHtEEeu1WfH-T/view?usp=drive_link" target="_blank" class="text-xs md:text-sm font-bold uppercase tracking-widest text-white hover:text-[#ffaa00] transition-colors mt-auto"><span class="underline underline-offset-8">Watch →</span></a>
                 </div>
@@ -412,7 +413,7 @@
                         <span class="text-[10px] md:text-xs font-medium uppercase tracking-widest text-[#86868b]">MTR · Anniversary Campaign</span>
                         <span class="text-[10px] md:text-xs border border-white/10 px-2 py-0.5 rounded opacity-20">11</span>
                     </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-pretty">Brighter Tomorrow</h3>
+                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">Brighter Tomorrow</h3>
                     <p class="case-description text-sm md:text-base text-[#86868b] leading-relaxed text-pretty text-center">Refreshing MTR's image for its 45th anniversary.</p>
                     <a href="https://drive.google.com/file/d/116fc0iNDhanW--aBPbtTBpI0VuRtoYJMb/view?usp=drive_link" target="_blank" class="text-xs md:text-sm font-bold uppercase tracking-widest text-white hover:text-[#ffaa00] transition-colors mt-auto"><span class="underline underline-offset-8">Watch →</span></a>
                 </div>
@@ -426,7 +427,7 @@
                         <span class="text-[10px] md:text-xs font-medium uppercase tracking-widest text-[#86868b]">Hang Seng · Social Activation</span>
                         <span class="text-[10px] md:text-xs border border-white/10 px-2 py-0.5 rounded opacity-20">12</span>
                     </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-pretty">InstaMockExam</h3>
+                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full text-pretty">InstaMockExam</h3>
                     <p class="case-description text-sm md:text-base text-[#86868b] leading-relaxed text-pretty text-center">Innovative social media activation that earned my first Gold Award.</p>
                     <a href="https://drive.google.com/file/d/1-DHVXuTlGvvQz3biohF2MOX0QQkWR_wO/view?usp=drive_link" target="_blank" class="text-xs md:text-sm font-bold uppercase tracking-widest text-white hover:text-[#ffaa00] transition-colors mt-auto"><span class="underline underline-offset-8">Watch →</span></a>
                 </div>
@@ -441,7 +442,7 @@
         </div>
 
         <div class="flex flex-col items-center">
-            <!-- Body Copy 2 (橫向 15s 滑入) -->
+            <!-- Body Copy 2 (橫向滑入，1.5s 變白，15s 滑行) -->
             <div class="max-w-4xl mb-[50vh] slide-reveal-horizontal">
                 <p class="body-copy-style text-pretty">
                     Bridging <span class="stroke-text">business logic</span>
