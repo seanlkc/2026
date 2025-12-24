@@ -10,7 +10,6 @@
     <style>
         :root {
             --bg-base: #050505;
-            --card-bg: rgba(28, 28, 30, 0.8);
             --text-main: #ffffff;
             --text-dim: rgba(255, 255, 255, 0.4);
             --accent: #ffaa00;
@@ -77,18 +76,13 @@
             transform: translateX(0);
         }
 
-        /* 作品卡片樣式 */
+        /* 作品容器樣式：徹底拿走灰色 BOX 背景與邊框 */
         .case-card {
-            background-color: var(--card-bg);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 2.5rem; 
-            overflow: hidden;
+            background-color: transparent; /* 拿走灰色背景 */
+            border: none; /* 拿走邊框 */
             width: 100%;
             max-width: 1100px;
             margin: 0 auto;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
         }
 
         .img-wrapper {
@@ -96,13 +90,13 @@
             overflow: hidden;
             background: #111;
             width: 100%;
+            border-radius: 2rem; /* 保持縮圖圓角 */
         }
 
         @media (min-width: 1024px) {
             .img-wrapper {
                 max-width: 85%;
-                margin: 2.5rem auto 0; 
-                border-radius: 1.5rem;
+                margin: 0 auto; 
             }
         }
 
@@ -112,43 +106,66 @@
             filter: contrast(1.05);
         }
 
-        /* 側邊導航按鈕：修復位移 Bug */
+        /* 導覽按鈕包裝層 */
+        .nav-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1100px; 
+            margin: 0 auto;
+            overflow: visible; 
+        }
+
+        /* 側邊導航按鈕：大尺寸、長箭頭、完全外掛 */
         .nav-btn {
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
             color: white;
-            width: 60px;
-            height: 60px;
+            width: 90px; 
+            height: 90px;
             border-radius: 50%;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 50;
-            /* 改為固定 top 距離，確保不隨文案長度上下晃動 */
+            z-index: 500;
             position: absolute;
-            top: 280px; 
+            top: 280px; /* 針對 16/9 縮圖中心固定位置 */
         }
+
+        /* 向外大幅度推開 180px，確保絕對不痴 thumbnail */
+        .nav-btn.prev-btn { left: -180px; }
+        .nav-btn.next-btn { right: -180px; }
 
         .nav-btn:hover {
             background: var(--accent);
             color: black;
-            transform: scale(1.15);
+            transform: scale(1.1);
             border-color: var(--accent);
         }
 
+        /* 響應式優化：螢幕不夠寬時向內收縮 */
+        @media (max-width: 1600px) {
+            .nav-btn.prev-btn { left: -100px; }
+            .nav-btn.next-btn { right: -100px; }
+        }
+
+        @media (max-width: 1300px) {
+            .nav-btn.prev-btn { left: -20px; }
+            .nav-btn.next-btn { right: -20px; }
+        }
+
         @media (max-width: 1024px) {
-            .nav-btn { top: 220px; }
+            .nav-btn { width: 60px; height: 60px; top: 180px; }
+            .nav-btn.prev-btn { left: 10px; }
+            .nav-btn.next-btn { right: 10px; }
         }
 
         @media (max-width: 768px) {
-            .nav-btn {
-                width: 44px;
-                height: 44px;
-                top: 180px;
-            }
+            .nav-btn { width: 48px; height: 48px; top: 160px; }
+            .nav-btn.prev-btn { left: 0; }
+            .nav-btn.next-btn { right: 0; }
         }
 
         /* 響應式邊距：增加 40% */
@@ -189,12 +206,12 @@
 
     <!-- 導航欄 -->
     <nav class="nav-editorial fixed top-0 left-0 w-full z-[100] py-8 dynamic-padding flex justify-between items-center text-white">
-        <div class="font-black tracking-tighter text-xl md:text-[22px] uppercase">Sean Leung</div>
+        <div class="font-black tracking-tighter text-xl md:text-[22px] uppercase text-left">Sean Leung</div>
         <div id="hkt-clock" class="clock-style text-xl md:text-[22px]">00:00:00 HKT</div>
     </nav>
 
     <!-- Hero Section -->
-    <header class="min-h-screen flex flex-col justify-center items-start dynamic-padding pt-20">
+    <header class="min-h-screen flex flex-col justify-center items-start dynamic-padding pt-20 text-left">
         <div class="reveal">
             <h1 class="title-monolith">
                 WORDS<br>
@@ -206,7 +223,7 @@
     </header>
 
     <!-- 理念介紹 -->
-    <div class="py-12 dynamic-padding">
+    <div class="py-12 dynamic-padding text-left">
         <div class="max-w-4xl"> 
             <p class="slide-reveal text-3xl md:text-5xl font-black uppercase text-white/90 tracking-tighter" style="line-height: 1.2;">
                 A copy-based Creative Director transforming complex strategies into resonant human stories since 2013.
@@ -216,22 +233,23 @@
 
     <!-- 作品展示區 -->
     <section id="projects" class="pt-64 pb-20 border-t border-white/5 dynamic-padding relative">
-        <div class="mb-20 slide-reveal">
+        <div class="mb-20 slide-reveal text-left">
             <h2 class="title-monolith leading-none">
                 SELECTED<br>
                 <span class="stroke-text">WORKS.</span>
             </h2>
         </div>
 
-        <!-- 帶有穩定導航的作品查看器 -->
-        <div class="relative flex items-center justify-center">
+        <div class="nav-wrapper">
             
-            <!-- 左按鈕：位置固定，不受文案長度影響 -->
-            <button onclick="prevCase()" class="nav-btn left-0 md:-left-20 lg:-left-28" aria-label="Previous">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            <!-- 左導航按鈕：大尺寸長箭頭 -->
+            <button onclick="prevCase()" class="nav-btn prev-btn" aria-label="Previous">
+                <svg width="32" height="64" viewBox="0 0 32 64" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <path d="M22 54L8 32L22 10" stroke-linecap="square"/>
+                </svg>
             </button>
 
-            <!-- 內容容器 -->
+            <!-- 作品查看器 -->
             <div id="case-viewer" class="w-full relative overflow-hidden" style="min-height: 600px;">
                 
                 <!-- Case 01 -->
@@ -245,9 +263,7 @@
                             </div>
                             <h3 class="text-3xl md:text-5xl font-black mb-6 uppercase">Unfold An Era</h3>
                             <p class="text-base md:text-xl text-white/60 leading-relaxed mb-10 flex-grow">Samsung's largest promotional campaign featuring MIRROR, redefining the brand's presence in the digital age.</p>
-                            <a href="https://drive.google.com/file/d/1wrZrxTB3UuLahXmldTf51NbAp3IeOChL/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors">
-                                <span class="underline underline-offset-8">Watch Case</span> →
-                            </a>
+                            <a href="https://drive.google.com/file/d/1wrZrxTB3UuLahXmldTf51NbAp3IeOChL/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors"><span class="underline underline-offset-8">Watch Case</span> →</a>
                         </div>
                     </div>
                 </div>
@@ -263,9 +279,7 @@
                             </div>
                             <h3 class="text-3xl md:text-5xl font-black mb-6 uppercase">Imaging Reimagined</h3>
                             <p class="text-base md:text-xl text-white/60 leading-relaxed mb-10 flex-grow">Collaborating with Hins Cheung to create a "Mobile Film", showcasing cutting-edge smartphone imaging as a legitimate creative medium.</p>
-                            <a href="https://drive.google.com/file/d/1CHRnx4xG5Z7Sx4PxYwTPcjU9JWwtWlXs/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors">
-                                <span class="underline underline-offset-8">Watch Case</span> →
-                            </a>
+                            <a href="https://drive.google.com/file/d/1CHRnx4xG5Z7Sx4PxYwTPcjU9JWwtWlXs/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors"><span class="underline underline-offset-8">Watch Case</span> →</a>
                         </div>
                     </div>
                 </div>
@@ -281,9 +295,7 @@
                             </div>
                             <h3 class="text-3xl md:text-5xl font-black mb-6 uppercase">The Longing Heart</h3>
                             <p class="text-base md:text-xl text-white/60 leading-relaxed mb-10 flex-grow">An emotional mini-film portraying a daughter's longing for her father, emphasizing the value of family reunions.</p>
-                            <a href="https://drive.google.com/file/d/1f049ntfiTD1TW44xJoZr5maKTqRSuyli/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors">
-                                <span class="underline underline-offset-8">Watch Case</span> →
-                            </a>
+                            <a href="https://drive.google.com/file/d/1f049ntfiTD1TW44xJoZr5maKTqRSuyli/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors"><span class="underline underline-offset-8">Watch Case</span> →</a>
                         </div>
                     </div>
                 </div>
@@ -291,7 +303,7 @@
                 <!-- Case 04 -->
                 <div class="case-item">
                     <div class="case-card">
-                        <div class="img-wrapper"><img src="https://i.imgur.com/JZvt5z2.jpg" alt="Maxim CNY"></div>
+                        <div class="img-wrapper"><img src="https://i.imgur.com/JZvt5z2.jpg" alt="Maxim LNY"></div>
                         <div class="p-8 md:p-12 flex flex-col flex-grow text-left">
                             <div class="flex justify-between items-start mb-6">
                                 <span class="text-xs font-medium uppercase tracking-widest text-white/40">Maxim's · Animated Commercial</span>
@@ -299,9 +311,7 @@
                             </div>
                             <h3 class="text-3xl md:text-5xl font-black mb-6 uppercase">Festive Spirit Animated</h3>
                             <p class="text-base md:text-xl text-white/60 leading-relaxed mb-10 flex-grow">Collaborated with a Japanese animation studio to create a high-quality CNY ad for Hong Kong.</p>
-                            <a href="https://drive.google.com/file/d/1XmiX2qTG5LX1cGZol1JRoAXZcrmkx-1m/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors">
-                                <span class="underline underline-offset-8">Watch Case</span> →
-                            </a>
+                            <a href="https://drive.google.com/file/d/1XmiX2qTG5LX1cGZol1JRoAXZcrmkx-1m/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors"><span class="underline underline-offset-8">Watch Case</span> →</a>
                         </div>
                     </div>
                 </div>
@@ -309,7 +319,7 @@
                 <!-- Case 05 -->
                 <div class="case-item">
                     <div class="case-card">
-                        <div class="img-wrapper"><img src="https://i.imgur.com/dBcgRPw.jpg" alt="Hang Seng Sandra Ng"></div>
+                        <div class="img-wrapper"><img src="https://i.imgur.com/dBcgRPw.jpg" alt="Hang SengSandra Ng"></div>
                         <div class="p-8 md:p-12 flex flex-col flex-grow text-left">
                             <div class="flex justify-between items-start mb-6">
                                 <span class="text-xs font-medium uppercase tracking-widest text-white/40">Hang Seng Bank · Thematic Campaign</span>
@@ -317,9 +327,7 @@
                             </div>
                             <h3 class="text-3xl md:text-5xl font-black mb-6 uppercase">The Chief Family Officer</h3>
                             <p class="text-base md:text-xl text-white/60 leading-relaxed mb-10 flex-grow">Featuring Sandra Ng and her family, promoting Prestige Family+ services to a wider audience base.</p>
-                            <a href="https://drive.google.com/file/d/1igfEBW1BElEz6Eu6XIpsZqBPoZQRZrYf/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors">
-                                <span class="underline underline-offset-8">Watch Case</span> →
-                            </a>
+                            <a href="https://drive.google.com/file/d/1igfEBW1BElEz6Eu6XIpsZqBPoZQRZrYf/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors"><span class="underline underline-offset-8">Watch Case</span> →</a>
                         </div>
                     </div>
                 </div>
@@ -335,9 +343,7 @@
                             </div>
                             <h3 class="text-3xl md:text-5xl font-black mb-6 uppercase">Premier Excellence</h3>
                             <p class="text-base md:text-xl text-white/60 leading-relaxed mb-10 flex-grow">Developing a compelling commercial targeting high-net-worth individuals to drive strategic growth among elite segments.</p>
-                            <a href="https://drive.google.com/file/d/1ATPOF6SPxRdBiomDT9j3LhJ5OKL1vuIl/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors">
-                                <span class="underline underline-offset-8">Watch Case</span> →
-                            </a>
+                            <a href="https://drive.google.com/file/d/1ATPOF6SPxRdBiomDT9j3LhJ5OKL1vuIl/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors"><span class="underline underline-offset-8">Watch Case</span> →</a>
                         </div>
                     </div>
                 </div>
@@ -353,9 +359,7 @@
                             </div>
                             <h3 class="text-3xl md:text-5xl font-black mb-6 uppercase text-pretty">A Human Promise</h3>
                             <p class="text-base md:text-xl text-white/60 leading-relaxed mb-10 flex-grow">Featuring Terence Lam, distilling the brief into a human promise: "Support when you need it most."</p>
-                            <a href="https://drive.google.com/file/d/1Vki7-prFtcPOpWru72hMubrfbI8JR8HZ/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors">
-                                <span class="underline underline-offset-8">Watch Case</span> →
-                            </a>
+                            <a href="https://drive.google.com/file/d/1Vki7-prFtcPOpWru72hMubrfbI8JR8HZ/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors"><span class="underline underline-offset-8">Watch Case</span> →</a>
                         </div>
                     </div>
                 </div>
@@ -363,7 +367,7 @@
                 <!-- Case 08 -->
                 <div class="case-item">
                     <div class="case-card">
-                        <div class="img-wrapper"><img src="https://i.imgur.com/gvLFKN8.jpg" alt="TamJai"></div>
+                        <div class="img-wrapper"><img src="https://i.imgur.com/gvLFKN8.jpg" alt="TamJai Anniversary"></div>
                         <div class="p-8 md:p-12 flex flex-col flex-grow text-left">
                             <div class="flex justify-between items-start mb-6">
                                 <span class="text-xs font-medium uppercase tracking-widest text-white/40">TamJai SamGor · Anniversary Campaign</span>
@@ -371,9 +375,7 @@
                             </div>
                             <h3 class="text-3xl md:text-5xl font-black mb-6 uppercase text-pretty">Keep on Spicing Up</h3>
                             <p class="text-base md:text-xl text-white/60 leading-relaxed mb-10 flex-grow">Celebrating a legacy of local flavor and perseverance through a powerful thematic execution.</p>
-                            <a href="https://drive.google.com/file/d/16N7mWfCL_-3SWcNWwowN7L5NsHasgg23/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors">
-                                <span class="underline underline-offset-8">Watch Case</span> →
-                            </a>
+                            <a href="https://drive.google.com/file/d/16N7mWfCL_-3SWcNWwowN7L5NsHasgg23/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors"><span class="underline underline-offset-8">Watch Case</span> →</a>
                         </div>
                     </div>
                 </div>
@@ -381,17 +383,15 @@
                 <!-- Case 09 -->
                 <div class="case-item">
                     <div class="case-card">
-                        <div class="img-wrapper"><img src="https://i.imgur.com/LP3gGLM.jpg" alt="TamJai Japan"></div>
+                        <div class="img-wrapper"><img src="https://i.imgur.com/LP3gGLM.jpg" alt="TamJai Japan MV"></div>
                         <div class="p-8 md:p-12 flex flex-col flex-grow text-left">
                             <div class="flex justify-between items-start mb-6">
-                                <span class="text-xs font-medium uppercase tracking-widest text-white/40">TamJai SamGor · Branded MV</span>
+                                <span class="text-xs font-medium uppercase tracking-widest text-white/40">TamJai SamGor · Branded Music Video</span>
                                 <span class="text-xs border border-white/10 px-3 py-1 rounded">09 / 12</span>
                             </div>
                             <h3 class="text-3xl md:text-5xl font-black mb-6 uppercase text-pretty">Never Say Never</h3>
                             <p class="text-base md:text-xl text-white/60 leading-relaxed mb-10 flex-grow">Collaborating with Jeffrey Ngai to shoot a music video in Japan, injecting fresh international appeal.</p>
-                            <a href="https://drive.google.com/file/d/1Qwk88B7mV4eJmeQI3UmLj0nftvFEk7fT/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors">
-                                <span class="underline underline-offset-8">Watch Case</span> →
-                            </a>
+                            <a href="https://drive.google.com/file/d/1Qwk88B7mV4eJmeQI3UmLj0nftvFEk7fT/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors"><span class="underline underline-offset-8">Watch Case</span> →</a>
                         </div>
                     </div>
                 </div>
@@ -399,7 +399,7 @@
                 <!-- Case 10 -->
                 <div class="case-item">
                     <div class="case-card">
-                        <div class="img-wrapper"><img src="https://i.imgur.com/QiTfKcm.jpg" alt="Ocean Park"></div>
+                        <div class="img-wrapper"><img src="https://i.imgur.com/QiTfKcm.jpg" alt="Ocean Park Halloween"></div>
                         <div class="p-8 md:p-12 flex flex-col flex-grow text-left">
                             <div class="flex justify-between items-start mb-6">
                                 <span class="text-xs font-medium uppercase tracking-widest text-white/40">Ocean Park · Campaign Film</span>
@@ -407,9 +407,7 @@
                             </div>
                             <h3 class="text-3xl md:text-5xl font-black mb-6 uppercase text-pretty">Exhilarating Spookiness</h3>
                             <p class="text-base md:text-xl text-white/60 leading-relaxed mb-10 flex-grow">Crafting a high-quality video that captures the exhilarating essence of Halloween.</p>
-                            <a href="https://drive.google.com/file/d/17Ox2akvC1h9QOArMKsZiHtEEeu1WfH-T/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors">
-                                <span class="underline underline-offset-8">Watch Case</span> →
-                            </a>
+                            <a href="https://drive.google.com/file/d/17Ox2akvC1h9QOArMKsZiHtEEeu1WfH-T/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors"><span class="underline underline-offset-8">Watch Case</span> →</a>
                         </div>
                     </div>
                 </div>
@@ -425,9 +423,7 @@
                             </div>
                             <h3 class="text-3xl md:text-5xl font-black mb-6 uppercase text-pretty">Brighter Tomorrow</h3>
                             <p class="text-base md:text-xl text-white/60 leading-relaxed mb-10 flex-grow">Partnering with YOLICA to refresh MTR's image for its 45th anniversary.</p>
-                            <a href="https://drive.google.com/file/d/16fc0iNDhanW--aBPbtTBpI0VuRtoYJMb/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors">
-                                <span class="underline underline-offset-8">Watch Case</span> →
-                            </a>
+                            <a href="https://drive.google.com/file/d/16fc0iNDhanW--aBPbtTBpI0VuRtoYJMb/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors"><span class="underline underline-offset-8">Watch Case</span> →</a>
                         </div>
                     </div>
                 </div>
@@ -443,25 +439,24 @@
                             </div>
                             <h3 class="text-3xl md:text-5xl font-black mb-6 uppercase text-pretty">InstaMockExam</h3>
                             <p class="text-base md:text-xl text-white/60 leading-relaxed mb-10 flex-grow">Developing an innovative social media activation that earned my first Kam Fan Gold Award.</p>
-                            <a href="https://drive.google.com/file/d/1-DHVXuTlGvvQz3biohF2MOX0QQkWR_wO/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors">
-                                <span class="underline underline-offset-8">Watch Case</span> →
-                            </a>
+                            <a href="https://drive.google.com/file/d/1-DHVXuTlGvvQz3biohF2MOX0QQkWR_wO/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors"><span class="underline underline-offset-8">Watch Case</span> →</a>
                         </div>
                     </div>
                 </div>
-
             </div>
 
-            <!-- 右按鈕：位置固定 -->
-            <button onclick="nextCase()" class="nav-btn right-0 md:-right-20 lg:-right-28" aria-label="Next">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            <!-- 右導航按鈕：大尺寸長箭頭 -->
+            <button onclick="nextCase()" class="nav-btn next-btn" aria-label="Next">
+                <svg width="32" height="64" viewBox="0 0 32 64" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <path d="M10 54L24 32L10 10" stroke-linecap="square"/>
+                </svg>
             </button>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="pt-64 pb-20 border-t border-white/5 dynamic-padding">
-        <div class="reveal mb-12 text-left">
+    <!-- Experience Section -->
+    <section id="about" class="pt-64 pb-20 border-t border-white/5 dynamic-padding text-left">
+        <div class="reveal mb-12">
             <h2 class="title-monolith">STRATEGIC<br><span class="stroke-text">NARRATIVES.</span></h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-12 gap-12 text-left">
@@ -474,10 +469,10 @@
                     </p>
                 </div>
                 
-                <div class="space-y-24 text-left">
+                <div class="space-y-24">
                     <div class="group border-b border-white/10 pb-12 reveal">
                         <div class="text-sm font-bold tracking-[0.3em] text-white/60 mb-6 uppercase text-left">Jan 2026 — Present</div>
-                        <div class="flex flex-col md:flex-row md:justify-between md:items-baseline gap-4">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-baseline gap-4 whitespace-nowrap overflow-hidden">
                             <span class="text-xl md:text-3xl font-black uppercase text-white/80">Narrow Door</span>
                             <span class="text-xl md:text-3xl font-black uppercase text-[#ffaa00]">Creative Director</span>
                         </div>
@@ -503,7 +498,7 @@
 
     <!-- Footer -->
     <footer id="contact" class="py-20 text-center bg-white text-black flex flex-col items-center">
-        <div class="reveal px-4 pb-12">
+        <div class="reveal px-4 pb-12 text-center">
             <h2 class="title-monolith !text-black mb-12 leading-[0.9]">LET'S CRAFT<br><span class="footer-stroke">THE NEXT STORY.</span></h2>
             <a href="https://www.linkedin.com/in/leungsean" target="_blank" class="text-xl md:text-4xl font-black uppercase border-b-4 border-black hover:opacity-50 transition-opacity pb-2">Connect on LinkedIn ></a>
         </div>
@@ -542,21 +537,18 @@
             const exitTranslate = direction === 'next' ? `-${moveDist}` : moveDist;
             const enterTranslate = direction === 'next' ? moveDist : `-${moveDist}`;
 
-            // 1. 舊案例滑出
             if (currentActive) {
                 currentActive.style.opacity = '0';
                 currentActive.style.transform = `translateX(${exitTranslate})`;
             }
 
-            // 2. 準備新案例
             nextActive.style.transition = 'none';
             nextActive.style.transform = `translateX(${enterTranslate})`;
             nextActive.style.opacity = '0';
             nextActive.style.display = 'block';
 
-            nextActive.offsetHeight; // 強制重繪
+            nextActive.offsetHeight; 
 
-            // 3. 啟動 1.0s 的進入動畫
             setTimeout(() => {
                 cases.forEach(c => c.classList.remove('active'));
                 nextActive.classList.add('active');
@@ -566,7 +558,6 @@
                 nextActive.style.transform = 'translateX(0)';
             }, 50);
 
-            // 4. 動畫結束後釋放鎖定 (配合 1.0s 動畫)
             setTimeout(() => {
                 cases.forEach((c, i) => {
                     if (i !== index) {
