@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="overflow-x-hidden">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sean Leung's Portfolio</title>
+    <!-- 禁止縮放以防止 UI 晃動 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- 更新網頁標題 -->
+    <title>Portfolio - Sean Leung</title>
     <!-- 統一使用 Inter 字體 -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;600;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -15,13 +17,21 @@
             --accent: #ffaa00;
         }
 
+        /* 強制根節點禁止橫向溢出，解決 iPhone 晃動問題 */
+        html, body {
+            overflow-x: hidden !important;
+            width: 100% !important;
+            position: relative;
+            margin: 0;
+            padding: 0;
+            -webkit-overflow-scrolling: touch;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-base);
             color: var(--text-main);
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-            margin: 0;
             text-align: center;
         }
 
@@ -63,6 +73,7 @@
             display: grid;
             grid-template-columns: repeat(1, 1fr);
             gap: 5rem;
+            width: 100%;
         }
 
         @media (min-width: 768px) {
@@ -85,6 +96,7 @@
             flex-direction: column;
             align-items: center;
             height: 100%;
+            width: 100%;
         }
 
         .img-wrapper {
@@ -113,6 +125,7 @@
             flex-direction: column;
             align-items: center;
             flex-grow: 1;
+            width: 100%;
         }
 
         .case-description {
@@ -127,6 +140,7 @@
             letter-spacing: -0.02em;
             line-height: 1.25;
             text-align: center;
+            word-wrap: break-word;
         }
 
         @media (min-width: 1024px) {
@@ -136,12 +150,13 @@
         }
 
         .dynamic-padding {
-            padding-left: 2.5rem; padding-right: 2.5rem;
+            padding-left: 1.5rem; padding-right: 1.5rem;
         }
         @media (min-width: 768px) { .dynamic-padding { padding-left: 5rem; padding-right: 5rem; } }
         @media (min-width: 1024px) { .dynamic-padding { padding-left: 9rem; padding-right: 9rem; } }
         @media (min-width: 1280px) { .dynamic-padding { padding-left: 11.25rem; padding-right: 11.25rem; } }
 
+        /* 通用揭幕動畫 */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -152,16 +167,21 @@
             transform: translateY(0);
         }
 
-        /* 奇數（左側）與偶數（右側）異步進場 */
+        /* 作品案例異步動態 */
         .case-reveal-odd { transition-duration: 1.2s; }
         .case-reveal-even { transition-duration: 1.6s; transition-delay: 0.2s; }
 
-        /* 核心文案橫向 15s 滑入 */
+        /* 核心文案橫向 15s 滑入 - 移動端優化偏移量以防止溢出 */
         .slide-reveal-horizontal {
             opacity: 0;
-            transform: translateX(80px);
+            transform: translateX(30px); 
             transition: all 15s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: transform, opacity;
+        }
+        @media (min-width: 768px) {
+            .slide-reveal-horizontal {
+                transform: translateX(80px);
+            }
         }
         .slide-reveal-horizontal.active {
             opacity: 1;
@@ -172,17 +192,19 @@
             background: rgba(5, 5, 5, 0.7);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            width: 100%;
+            left: 0;
+            right: 0;
         }
 
-        /* 導航欄標籤樣式：極簡數據感 */
         .nav-label {
-            font-size: 11px;
+            font-size: clamp(9px, 2vw, 11px);
             font-weight: 600; 
             letter-spacing: 0.25em;
             text-transform: uppercase;
+            color: #ffffff;
         }
 
-        /* 實時時鐘樣式：純白對齊，不使用斜體 */
         .clock-data {
             color: var(--accent);
             font-weight: 600;
@@ -200,16 +222,16 @@
         ::-webkit-scrollbar-thumb { background: #333; }
     </style>
 </head>
-<body class="film-grain">
+<body class="film-grain overflow-x-hidden w-full">
 
-    <!-- 導航欄：檔案與時間框架 -->
-    <nav class="nav-editorial fixed top-0 left-0 w-full z-[100] py-6 dynamic-padding flex justify-between items-center text-white">
-        <div class="nav-label">PORTFOLIO — SEAN LEUNG</div>
+    <!-- 導航欄 -->
+    <nav class="nav-editorial fixed top-0 w-full z-[100] py-6 dynamic-padding flex justify-between items-center">
+        <div class="nav-label text-left">PORTFOLIO — SEAN LEUNG</div>
         <div id="hkt-clock" class="nav-label clock-data text-right">00:00:00 HKT</div>
     </nav>
 
     <!-- Section 1: Hero -->
-    <header class="min-h-screen flex flex-col justify-center items-center dynamic-padding">
+    <header class="min-h-screen flex flex-col justify-center items-center dynamic-padding overflow-hidden">
         <div class="reveal">
             <h1 class="title-monolith">
                 WORDS<br>
@@ -221,7 +243,7 @@
     </header>
 
     <!-- Section 2: Body Copy 1 (橫向 15s 滑入) -->
-    <section class="py-[50vh] flex flex-col items-center dynamic-padding border-t border-white/5">
+    <section class="py-[50vh] flex flex-col items-center dynamic-padding border-t border-white/5 overflow-hidden">
         <div class="max-w-4xl slide-reveal-horizontal">
             <p class="body-copy-style text-pretty">
                 A <span class="stroke-text">Copy-based Creative</span>
@@ -233,7 +255,7 @@
     </section>
 
     <!-- Section 3: Selected Works -->
-    <section id="projects" class="pb-0 border-t border-white/5 dynamic-padding">
+    <section id="projects" class="pb-0 border-t border-white/5 dynamic-padding overflow-hidden">
         <div class="reveal pt-20 flex flex-col items-center mb-[50vh]">
             <h2 class="title-monolith leading-none">
                 SELECTED<br>
@@ -242,7 +264,7 @@
         </div>
 
         <div class="project-grid pb-[50vh]">
-            <!-- Case 01: 左 -->
+            <!-- Case 01 -->
             <div class="case-wrapper reveal case-reveal-odd">
                 <div class="img-wrapper"><img src="https://i.imgur.com/1iwUGaS.jpg" alt="Samsung Mirror" class="case-img"></div>
                 <div class="case-content">
@@ -256,7 +278,7 @@
                 </div>
             </div>
 
-            <!-- Case 02: 右 (延遲) -->
+            <!-- Case 02 -->
             <div class="case-wrapper reveal case-reveal-even">
                 <div class="img-wrapper"><img src="https://i.imgur.com/BPLQfTQ.jpg" alt="Samsung Hins" class="case-img"></div>
                 <div class="case-content">
@@ -270,7 +292,7 @@
                 </div>
             </div>
 
-            <!-- Case 03: 左 -->
+            <!-- Case 03 -->
             <div class="case-wrapper reveal case-reveal-odd">
                 <div class="img-wrapper"><img src="https://i.imgur.com/DOc8FB2.jpg" alt="Maxim Mid-Autumn" class="case-img"></div>
                 <div class="case-content">
@@ -284,7 +306,7 @@
                 </div>
             </div>
 
-            <!-- Case 04: 右 -->
+            <!-- Case 04 -->
             <div class="case-wrapper reveal case-reveal-even">
                 <div class="img-wrapper"><img src="https://i.imgur.com/JZvt5z2.jpg" alt="Maxim CNY" class="case-img"></div>
                 <div class="case-content">
@@ -293,7 +315,7 @@
                         <span class="text-[10px] md:text-xs border border-white/10 px-2 py-0.5 rounded opacity-20">04</span>
                     </div>
                     <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase">Festive Spirit Animated</h3>
-                    <p class="case-description text-sm md:text-base text-[#86868b] leading-relaxed text-pretty text-center">Collaborated with a Japanese animation studio to create a high-quality CNY ad.</p>
+                    <p class="case-description text-sm md:text-base text-[#86868b] leading-relaxed text-pretty text-center">Collaborated with a Japanese animation studio to create a high-quality CNY ad for Hong Kong.</p>
                     <a href="https://drive.google.com/file/d/1XmiX2qTG5LX1cGZol1JRoAXZcrmkx-1m/view?usp=drive_link" target="_blank" class="text-xs md:text-sm font-bold uppercase tracking-widest text-white hover:text-[#ffaa00] transition-colors mt-auto"><span class="underline underline-offset-8">Watch →</span></a>
                 </div>
             </div>
@@ -412,8 +434,8 @@
         </div>
     </section>
 
-    <!-- Section 4: Experience (全對稱間距 50vh) -->
-    <section id="about" class="pt-[50vh] pb-20 border-t border-white/5 dynamic-padding">
+    <!-- Section 4: Experience -->
+    <section id="about" class="pt-[50vh] pb-20 border-t border-white/5 dynamic-padding overflow-hidden">
         <div class="reveal mb-[50vh] flex flex-col items-center">
             <h2 class="title-monolith">STRATEGIC<br><span class="stroke-text">NARRATIVES.</span></h2>
         </div>
@@ -469,7 +491,7 @@
     </section>
 
     <!-- Footer -->
-    <footer id="contact" class="py-60 text-center bg-white text-black flex flex-col items-center">
+    <footer id="contact" class="py-60 text-center bg-white text-black flex flex-col items-center overflow-hidden">
         <div class="reveal px-4 pb-12 text-center w-full">
             <h2 class="footer-tagline text-3xl md:text-[6.5rem] mb-12 leading-[0.85] text-black">
                 LET'S CRAFT<br>
