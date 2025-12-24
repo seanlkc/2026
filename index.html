@@ -76,10 +76,10 @@
             transform: translateX(0);
         }
 
-        /* 作品容器樣式：徹底拿走灰色 BOX 背景與邊框 */
+        /* 作品容器樣式：徹底拿走灰色 BOX */
         .case-card {
-            background-color: transparent; /* 拿走灰色背景 */
-            border: none; /* 拿走邊框 */
+            background-color: transparent; 
+            border: none;
             width: 100%;
             max-width: 1100px;
             margin: 0 auto;
@@ -90,7 +90,7 @@
             overflow: hidden;
             background: #111;
             width: 100%;
-            border-radius: 2rem; /* 保持縮圖圓角 */
+            border-radius: 2rem;
         }
 
         @media (min-width: 1024px) {
@@ -115,7 +115,7 @@
             overflow: visible; 
         }
 
-        /* 側邊導航按鈕：大尺寸、長箭頭、完全外掛 */
+        /* 側邊導航按鈕：大圓框，但內部箭頭尺寸修正 */
         .nav-btn {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -131,17 +131,17 @@
             justify-content: center;
             z-index: 500;
             position: absolute;
-            top: 280px; /* 針對 16/9 縮圖中心固定位置 */
+            top: 280px; /* 對齊 16/9 縮圖中心 */
         }
 
-        /* 向外大幅度推開 180px，確保絕對不痴 thumbnail */
+        /* 絕對推開 180px，確保不痴 thumbnail */
         .nav-btn.prev-btn { left: -180px; }
         .nav-btn.next-btn { right: -180px; }
 
         .nav-btn:hover {
             background: var(--accent);
             color: black;
-            transform: scale(1.1);
+            transform: scale(1.05);
             border-color: var(--accent);
         }
 
@@ -242,10 +242,10 @@
 
         <div class="nav-wrapper">
             
-            <!-- 左導航按鈕：大尺寸長箭頭 -->
+            <!-- 左導航按鈕：尺寸已修正，箭頭居中不溢出 -->
             <button onclick="prevCase()" class="nav-btn prev-btn" aria-label="Previous">
-                <svg width="32" height="64" viewBox="0 0 32 64" fill="none" stroke="currentColor" stroke-width="1.2">
-                    <path d="M22 54L8 32L22 10" stroke-linecap="square"/>
+                <svg width="24" height="40" viewBox="0 0 24 40" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M18 36L6 20L18 4" stroke-linecap="square"/>
                 </svg>
             </button>
 
@@ -319,7 +319,7 @@
                 <!-- Case 05 -->
                 <div class="case-item">
                     <div class="case-card">
-                        <div class="img-wrapper"><img src="https://i.imgur.com/dBcgRPw.jpg" alt="Hang SengSandra Ng"></div>
+                        <div class="img-wrapper"><img src="https://i.imgur.com/dBcgRPw.jpg" alt="Hang Seng Sandra Ng"></div>
                         <div class="p-8 md:p-12 flex flex-col flex-grow text-left">
                             <div class="flex justify-between items-start mb-6">
                                 <span class="text-xs font-medium uppercase tracking-widest text-white/40">Hang Seng Bank · Thematic Campaign</span>
@@ -357,7 +357,7 @@
                                 <span class="text-xs font-medium uppercase tracking-widest text-white/40">Prudential · Integrated Campaign</span>
                                 <span class="text-xs border border-white/10 px-3 py-1 rounded">07 / 12</span>
                             </div>
-                            <h3 class="text-3xl md:text-5xl font-black mb-6 uppercase text-pretty">A Human Promise</h3>
+                            <h3 class="text-3xl md:text-5xl font-black mb-6 uppercase">A Human Promise</h3>
                             <p class="text-base md:text-xl text-white/60 leading-relaxed mb-10 flex-grow">Featuring Terence Lam, distilling the brief into a human promise: "Support when you need it most."</p>
                             <a href="https://drive.google.com/file/d/1Vki7-prFtcPOpWru72hMubrfbI8JR8HZ/view?usp=drive_link" target="_blank" class="text-sm font-bold uppercase tracking-widest hover:text-[#ffaa00] transition-colors"><span class="underline underline-offset-8">Watch Case</span> →</a>
                         </div>
@@ -445,10 +445,10 @@
                 </div>
             </div>
 
-            <!-- 右導航按鈕：大尺寸長箭頭 -->
+            <!-- 右導航按鈕：尺寸已修正，箭頭居中不溢出 -->
             <button onclick="nextCase()" class="nav-btn next-btn" aria-label="Next">
-                <svg width="32" height="64" viewBox="0 0 32 64" fill="none" stroke="currentColor" stroke-width="1.2">
-                    <path d="M10 54L24 32L10 10" stroke-linecap="square"/>
+                <svg width="24" height="40" viewBox="0 0 24 40" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M6 36L18 20L6 4" stroke-linecap="square"/>
                 </svg>
             </button>
         </div>
