@@ -6,7 +6,7 @@
     <title>Portfolio — Sean Leung | Creative Director</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
@@ -38,13 +38,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        .serif-italic {
-            font-family: 'Instrument Serif', Georgia, serif;
-            font-style: italic;
-            font-weight: 400;
-        }
-
-        /* 細膩磨砂感 (Refined Film Grain) */
+        /* 細膩磨砂感 (Film Grain) */
         .film-grain::after {
             content: "";
             position: fixed;
@@ -79,7 +73,7 @@
             text-transform: uppercase;
         }
 
-        /* 標誌性黃色斜體 Highlight — 收斂邊緣令質感更成熟 */
+        /* 經典亮黃斜體 Highlight */
         .stroke-text {
             position: relative;
             display: inline-block;
@@ -99,7 +93,7 @@
             transform: rotate(-1.2deg);
         }
 
-        /* 導航欄：Editorial Glassmorphism */
+        /* 導航欄 Glassmorphism */
         .nav-editorial {
             background: rgba(226, 226, 224, 0.82);
             backdrop-filter: blur(16px);
@@ -121,7 +115,6 @@
         @media (min-width: 768px) { .dynamic-padding { padding-left: 3.5rem; padding-right: 3.5rem; } }
         @media (min-width: 1280px) { .dynamic-padding { padding-left: 6rem; padding-right: 6rem; } }
 
-        /* 緊湊且富建築感的作品網格 */
         .project-grid {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
@@ -144,7 +137,6 @@
             }
         }
 
-        /* 升級版卡片：褪去厚重卡通黑框與硬陰影，改用 1px 精緻髮絲線與微妙浮起 */
         .case-wrapper {
             display: flex;
             flex-direction: column;
@@ -213,15 +205,6 @@
             color: #fff;
         }
 
-        .body-copy-style {
-            font-size: clamp(1.5rem, 3.4vw, 2.65rem); 
-            font-weight: 900;
-            color: var(--text-main); 
-            letter-spacing: -0.025em;
-            line-height: 1.28;
-        }
-
-        /* 漸現動畫 */
         .reveal {
             opacity: 0;
             transform: translateY(24px);
@@ -232,10 +215,9 @@
             transform: translateY(0);
         }
 
-        /* 履歷表：雜誌式橫向列表，大幅節省垂直空間 */
         .exp-row {
             border-bottom: 1px solid var(--border-hairline);
-            transition: background-color 0.25s ease, padding-left 0.3s ease;
+            transition: background-color 0.25s ease;
         }
         .exp-row:first-child {
             border-top: 1px solid var(--border-hairline);
@@ -244,7 +226,6 @@
             background-color: rgba(0, 0, 0, 0.03);
         }
 
-        /* Footer 按鈕 */
         .footer-connect-btn {
             display: inline-flex;
             align-items: center;
@@ -271,15 +252,14 @@
 </head>
 <body class="film-grain overflow-x-hidden w-full">
 
-    <!-- Top Editorial Navigation -->
+    <!-- Top Navigation -->
     <nav class="nav-editorial fixed top-0 w-full z-[100] py-4 md:py-5 dynamic-padding flex justify-between items-center">
         <div class="flex items-center gap-4">
             <a href="#" class="nav-label">SEAN LEUNG</a>
         </div>
 
-        <div class="hidden lg:flex items-center gap-8">
+        <div class="hidden md:flex items-center gap-8">
             <a href="#projects" class="nav-label hover:opacity-50 transition-opacity">Works (13)</a>
-            <a href="#about" class="nav-label hover:opacity-50 transition-opacity">Philosophy</a>
             <a href="#experience" class="nav-label hover:opacity-50 transition-opacity">Experience</a>
             <a href="#contact" class="nav-label hover:opacity-50 transition-opacity">Contact</a>
         </div>
@@ -287,7 +267,7 @@
         <div id="hkt-clock" class="nav-label text-right tabular-nums">00:00:00 HKT</div>
     </nav>
 
-    <!-- Section 1: Hero + Bio Statement (移除 since 2013，文案充實度增加 30%) -->
+    <!-- Section 1: Hero & Statement (經字體平衡優化，徹底消除單字懸掛) -->
     <header class="pt-32 pb-20 md:pt-44 md:pb-28 dynamic-padding border-b border-black/15">
         <div class="max-w-7xl mx-auto">
             <div class="reveal flex flex-col items-center text-center">
@@ -304,16 +284,17 @@
                     <span class="stroke-text">THAT MOVE.</span>
                 </h1>
 
-                <div class="max-w-3xl pt-8 border-t border-black/15">
-                    <p class="text-base md:text-xl font-medium text-black/80 leading-relaxed text-pretty">
-                        A <span class="font-black text-black underline decoration-2 underline-offset-4">Copy-based Creative Director</span> transforming complex brand strategies into resonant human stories and culturally sharp campaigns across Hong Kong &amp; APAC. Blending rigorous strategic thinking with craft-driven emotional truth, creating high-impact work that earns genuine cultural talkability and business growth.
+                <!-- 文字塊：採用 max-w-2xl + text-wrap:balance，行寬對稱無 orphan -->
+                <div class="max-w-2xl mx-auto pt-8 border-t border-black/15">
+                    <p class="text-base md:text-lg font-normal text-black/80 leading-relaxed text-center [text-wrap:balance]">
+                        A <span class="font-bold text-black underline decoration-1 underline-offset-4">Copy-based Creative Director</span> transforming complex brand strategies into resonant human stories and culturally sharp campaigns across Hong Kong &amp; APAC. Blending rigorous strategic thinking with craft-driven emotional truth to create high-impact work that earns genuine cultural talkability and sustained business growth.
                     </p>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Section 2: Selected Works (清晰劃分 3 大類別，共 13 個作品，移除年份) -->
+    <!-- Section 2: Selected Works (3 大類別，共 13 個作品) -->
     <section id="projects" class="py-20 md:py-28 dynamic-padding border-b border-black/15">
         <div class="max-w-7xl mx-auto">
             
@@ -359,7 +340,7 @@
                         </div>
                     </article>
 
-                    <!-- Case 02 (Hang Seng Sandra Ng) -->
+                    <!-- Case 02 -->
                     <article class="case-wrapper reveal">
                         <div>
                             <div class="flex justify-between w-full items-center mb-3">
@@ -377,7 +358,7 @@
                         </div>
                     </article>
 
-                    <!-- Case 03 (HSBC Premier) -->
+                    <!-- Case 03 -->
                     <article class="case-wrapper reveal">
                         <div>
                             <div class="flex justify-between w-full items-center mb-3">
@@ -395,7 +376,7 @@
                         </div>
                     </article>
 
-                    <!-- Case 04 (Prudential) -->
+                    <!-- Case 04 -->
                     <article class="case-wrapper reveal">
                         <div>
                             <div class="flex justify-between w-full items-center mb-3">
@@ -413,7 +394,7 @@
                         </div>
                     </article>
 
-                    <!-- Case 05 (MTR) -->
+                    <!-- Case 05 -->
                     <article class="case-wrapper reveal">
                         <div>
                             <div class="flex justify-between w-full items-center mb-3">
@@ -444,7 +425,7 @@
                 </div>
 
                 <div class="project-grid">
-                    <!-- Case 06 (Samsung Hins) -->
+                    <!-- Case 06 -->
                     <article class="case-wrapper reveal">
                         <div>
                             <div class="flex justify-between w-full items-center mb-3">
@@ -462,7 +443,7 @@
                         </div>
                     </article>
 
-                    <!-- Case 07 (Maxim's Mid-Autumn) -->
+                    <!-- Case 07 -->
                     <article class="case-wrapper reveal">
                         <div>
                             <div class="flex justify-between w-full items-center mb-3">
@@ -480,7 +461,7 @@
                         </div>
                     </article>
 
-                    <!-- Case 08 (Maxim CNY) -->
+                    <!-- Case 08 -->
                     <article class="case-wrapper reveal">
                         <div>
                             <div class="flex justify-between w-full items-center mb-3">
@@ -498,7 +479,7 @@
                         </div>
                     </article>
 
-                    <!-- Case 09 (TamJai Jeffrey) -->
+                    <!-- Case 09 -->
                     <article class="case-wrapper reveal">
                         <div>
                             <div class="flex justify-between w-full items-center mb-3">
@@ -529,7 +510,7 @@
                 </div>
 
                 <div class="project-grid">
-                    <!-- Case 10 (TamJai SamGor) -->
+                    <!-- Case 10 -->
                     <article class="case-wrapper reveal">
                         <div>
                             <div class="flex justify-between w-full items-center mb-3">
@@ -547,7 +528,7 @@
                         </div>
                     </article>
 
-                    <!-- Case 11 (Ocean Park) -->
+                    <!-- Case 11 -->
                     <article class="case-wrapper reveal">
                         <div>
                             <div class="flex justify-between w-full items-center mb-3">
@@ -565,7 +546,7 @@
                         </div>
                     </article>
 
-                    <!-- Case 12 (InstaMockExam) -->
+                    <!-- Case 12 -->
                     <article class="case-wrapper reveal">
                         <div>
                             <div class="flex justify-between w-full items-center mb-3">
@@ -583,7 +564,7 @@
                         </div>
                     </article>
 
-                    <!-- Case 13 (INDICAID) -->
+                    <!-- Case 13 (INDICAID - Gold Effie Winner) -->
                     <article class="case-wrapper reveal">
                         <div>
                             <div class="flex justify-between w-full items-center mb-3">
@@ -594,7 +575,7 @@
                                 <img src="https://i.ibb.co/JPf24DD/aedd9d72d7a37e9cf724744d40662548771c8e3763e7e942dfdc5ce1c31843f3.png" alt="INDICAID Don't Trust, Test" loading="lazy" class="case-img">
                             </div>
                             <h3 class="text-xl md:text-2xl font-black mb-2.5 uppercase tracking-tight text-left">DON'T TRUST, TEST</h3>
-                            <p class="case-description text-sm leading-relaxed text-left mb-6">Turning a viral controversy into a provocative campaign that reframed HPV testing as self-protection.</p>
+                            <p class="case-description text-sm leading-relaxed text-left mb-6">Turning a viral controversy into a provocative public health campaign reframing HPV testing as self-protection.</p>
                         </div>
                         <div class="flex justify-start">
                             <a href="https://www.marketing-interactive.com/indicaid-turns-hpv-controversy-into-call-for-sexual-health-accountability" target="_blank" rel="noopener" class="watch-btn">Read Press <span>↗</span></a>
@@ -606,24 +587,20 @@
         </div>
     </section>
 
-    <!-- Section 3: Strategic Philosophy -->
-    <!-- Section 4: Work Experience (升級為雜誌式橫向履歷表，清晰呈現 MSL 現職及 Narrow Door 紀錄) -->
+    <!-- Section 3: Work Experience (已移除右側年份標記，並校對為 Index 02) -->
     <section id="experience" class="py-20 md:py-28 dynamic-padding border-b border-black/15">
         <div class="max-w-6xl mx-auto">
             <div class="reveal flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16">
                 <div>
-                    <span class="text-[11px] font-extrabold tracking-[0.25em] uppercase text-black/50 block mb-2">Index 03 — Career Track</span>
+                    <span class="text-[11px] font-extrabold tracking-[0.25em] uppercase text-black/50 block mb-2">Index 02 — Career Track</span>
                     <h2 class="section-header-title">
                         WORK <span class="stroke-text">EXPERIENCE.</span>
                     </h2>
                 </div>
-                <p class="text-xs md:text-sm font-semibold uppercase tracking-[0.15em] text-black/60 mt-4 md:mt-0">
-                    2013 — Present · Hong Kong
-                </p>
             </div>
 
             <div class="w-full">
-                <!-- Job 1: MSL (New Current Role) -->
+                <!-- Job 1: MSL (Current Role) -->
                 <div class="exp-row reveal py-6 md:py-7 px-2 md:px-4 grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 items-start md:items-center">
                     <div class="md:col-span-4 flex items-center gap-3">
                         <span class="w-2 h-2 rounded-full bg-black inline-block"></span>
@@ -637,7 +614,7 @@
                     </div>
                 </div>
 
-                <!-- Job 2: Narrow Door (Updated End Date) -->
+                <!-- Job 2: Narrow Door -->
                 <div class="exp-row reveal py-6 md:py-7 px-2 md:px-4 grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 items-start md:items-center">
                     <div class="md:col-span-4">
                         <span class="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-black/60 tabular-nums">Jan 2026 — Jun 2026</span>
@@ -650,7 +627,7 @@
                     </div>
                 </div>
 
-                <!-- Job 3 -->
+                <!-- Job 3: Secret Tour -->
                 <div class="exp-row reveal py-6 md:py-7 px-2 md:px-4 grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 items-start md:items-center">
                     <div class="md:col-span-4">
                         <span class="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-black/60 tabular-nums">Aug 2025 — Dec 2025</span>
@@ -663,7 +640,7 @@
                     </div>
                 </div>
 
-                <!-- Job 4 -->
+                <!-- Job 4: Publicis -->
                 <div class="exp-row reveal py-6 md:py-7 px-2 md:px-4 grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 items-start md:items-center">
                     <div class="md:col-span-4">
                         <span class="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-black/60 tabular-nums">Jan 2025 — Aug 2025</span>
@@ -676,7 +653,7 @@
                     </div>
                 </div>
 
-                <!-- Job 5 -->
+                <!-- Job 5: The Bread Digital -->
                 <div class="exp-row reveal py-6 md:py-7 px-2 md:px-4 grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 items-start md:items-center">
                     <div class="md:col-span-4">
                         <span class="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-black/60 tabular-nums">May 2019 — Dec 2024</span>
@@ -689,7 +666,7 @@
                     </div>
                 </div>
 
-                <!-- Job 6 -->
+                <!-- Job 6: Dentsu McGarryBowen -->
                 <div class="exp-row reveal py-6 md:py-7 px-2 md:px-4 grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 items-start md:items-center">
                     <div class="md:col-span-4">
                         <span class="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-black/60 tabular-nums">Sep 2017 — May 2019</span>
@@ -702,7 +679,7 @@
                     </div>
                 </div>
 
-                <!-- Job 7 -->
+                <!-- Job 7: DDB -->
                 <div class="exp-row reveal py-6 md:py-7 px-2 md:px-4 grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 items-start md:items-center">
                     <div class="md:col-span-4">
                         <span class="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-black/60 tabular-nums">Feb 2017 — Sep 2017</span>
@@ -718,10 +695,10 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer (校對為 Index 03) -->
     <footer id="contact" class="py-28 md:py-36 dynamic-padding text-center flex flex-col items-center">
         <div class="reveal max-w-5xl mx-auto w-full">
-            <span class="text-[11px] font-extrabold tracking-[0.25em] uppercase text-black/50 block mb-5">Index 04 — Initiate Dialogue</span>
+            <span class="text-[11px] font-extrabold tracking-[0.25em] uppercase text-black/50 block mb-5">Index 03 — Initiate Dialogue</span>
             <h2 class="title-monolith !text-[clamp(2.4rem,8vw,6.5rem)] mb-12 text-black text-pretty">
                 LET'S CRAFT<br><span class="stroke-text">THE NEXT STORY.</span>
             </h2>
