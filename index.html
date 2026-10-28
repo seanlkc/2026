@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" class="overflow-x-hidden">
+<html lang="en" class="overflow-x-hidden scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Portfolio — Sean Leung</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;600;900&display=swap" rel="stylesheet">
+    <title>Portfolio — Sean Leung | Creative Director</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
-            /* 參照 83128.png 的磨砂淺灰 */
-            --bg-base: #E2E2E2; 
-            --text-main: #000000;
-            --accent: #F5E000; 
-            --grid-line: rgba(0, 0, 0, 0.05);
-            --card-bg: #E0E0E0; 
+            --bg-base: #E2E2E0; 
+            --text-main: #0D0D0D;
+            --text-muted: rgba(13, 13, 13, 0.55);
+            --accent: #F2DC00; 
+            --grid-line: rgba(0, 0, 0, 0.045);
+            --border-hairline: rgba(0, 0, 0, 0.18);
+            --card-bg: rgba(232, 232, 230, 0.75); 
         }
 
         html, body {
@@ -27,507 +30,710 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-base);
-            /* 網格大小 65px */
             background-image: 
                 linear-gradient(var(--grid-line) 1px, transparent 1px),
                 linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-            background-size: 65px 65px;
+            background-size: 64px 64px;
             color: var(--text-main);
             -webkit-font-smoothing: antialiased;
-            text-align: center;
         }
 
-        /* 磨砂感 (Grainy Effect) */
+        .serif-italic {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        /* 細膩磨砂感 (Refined Film Grain) */
         .film-grain::after {
             content: "";
             position: fixed;
             top: -100%; left: -100%; width: 300%; height: 300%;
             z-index: 9999;
-            opacity: 0.08; 
+            opacity: 0.065; 
             pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3BaseFilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/baseFilter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
-            animation: grain-dance 1s steps(2) infinite;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+            animation: grain-dance 1.2s steps(2) infinite;
         }
 
         @keyframes grain-dance {
             0% { transform: translate(0, 0); }
-            50% { transform: translate(-5%, -5%); }
-            100% { transform: translate(5%, 5%); }
+            50% { transform: translate(-3%, -3%); }
+            100% { transform: translate(3%, 3%); }
         }
 
         .title-monolith {
-            font-size: clamp(2.4rem, 11.5vw, 10rem); 
+            font-size: clamp(2.6rem, 10.5vw, 8.8rem); 
             font-weight: 900;
-            line-height: 0.85; 
+            line-height: 0.88; 
             letter-spacing: -0.05em;
             text-transform: uppercase;
             color: var(--text-main);
         }
 
-        /* 歪斜偏移、斜體 Highlight 效果 */
+        .section-header-title {
+            font-size: clamp(2.2rem, 7vw, 5.5rem);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+        }
+
+        /* 標誌性黃色斜體 Highlight — 收斂邊緣令質感更成熟 */
         .stroke-text {
             position: relative;
             display: inline-block;
             font-style: italic; 
             z-index: 1;
-            padding: 0 0.15em;
+            padding: 0 0.12em;
         }
         .stroke-text::before {
             content: '';
             position: absolute;
             background-color: var(--accent);
-            width: 105%;
-            height: 85%;
-            left: -2px;
-            top: 0.1em; 
+            width: 103%;
+            height: 82%;
+            left: -1.5%;
+            top: 0.11em; 
             z-index: -1;
-            transform: rotate(-1.5deg);
+            transform: rotate(-1.2deg);
         }
 
+        /* 導航欄：Editorial Glassmorphism */
+        .nav-editorial {
+            background: rgba(226, 226, 224, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-hairline);
+            width: 100%;
+            left: 0;
+        }
+
+        .nav-label {
+            font-size: clamp(9px, 1.5vw, 11px);
+            font-weight: 800; 
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-main);
+        }
+
+        .dynamic-padding { padding-left: 1.25rem; padding-right: 1.25rem; }
+        @media (min-width: 768px) { .dynamic-padding { padding-left: 3.5rem; padding-right: 3.5rem; } }
+        @media (min-width: 1280px) { .dynamic-padding { padding-left: 6rem; padding-right: 6rem; } }
+
+        /* 緊湊且富建築感的作品網格 */
         .project-grid {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
-            gap: 4rem;
+            gap: 2rem;
             width: 100%;
         }
 
         @media (min-width: 768px) {
             .project-grid {
                 grid-template-columns: repeat(2, 1fr);
-                column-gap: 3rem;
-                row-gap: 5rem;
+                column-gap: 2.25rem;
+                row-gap: 3rem;
             }
         }
 
-        @media (min-width: 1024px) {
+        @media (min-width: 1280px) {
             .project-grid {
-                column-gap: 5rem;
-                row-gap: 8rem;
+                column-gap: 3rem;
+                row-gap: 3.75rem;
             }
         }
 
+        /* 升級版卡片：褪去厚重卡通黑框與硬陰影，改用 1px 精緻髮絲線與微妙浮起 */
         .case-wrapper {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            justify-content: space-between;
             height: 100%;
             width: 100%;
             background-color: var(--card-bg); 
-            border: 2px solid #000; 
-            border-radius: 0; 
-            padding: 1.5rem;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(0, 0, 0, 0.85); 
+            padding: 1.25rem;
+            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.45s ease, box-shadow 0.45s ease;
         }
 
-        @media (min-width: 1024px) { .case-wrapper { padding: 2.5rem; } }
+        @media (min-width: 1024px) { 
+            .case-wrapper { padding: 1.75rem; } 
+        }
 
         .case-wrapper:hover {
-            transform: translate(8px, -8px); 
-            box-shadow: -12px 12px 0px 0px #000;
+            transform: translateY(-4px);
+            background-color: #EAEAE8;
+            box-shadow: 0 18px 36px -12px rgba(0, 0, 0, 0.12);
         }
 
         .img-wrapper {
             aspect-ratio: 16/9;
             overflow: hidden;
-            background: #000;
+            background: #111;
             width: 100%;
-            border: 2px solid #000;
-            margin-bottom: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.85);
+            margin-bottom: 1.25rem;
+            position: relative;
         }
 
         .case-img {
             width: 100%; height: 100%;
             object-fit: cover;
-            filter: contrast(1.05); 
-            transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            filter: contrast(1.03); 
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .case-wrapper:hover .case-img { transform: scale(1.06); }
-
-        .case-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex-grow: 1;
-            width: 100%;
-        }
+        .case-wrapper:hover .case-img { transform: scale(1.045); }
 
         .case-description {
-            flex-grow: 1; 
-            margin-bottom: 2.5rem; 
-            color: rgba(0, 0, 0, 0.8);
+            color: rgba(0, 0, 0, 0.72);
             font-weight: 400;
-            line-height: 1.5;
-        }
-
-        .body-copy-style {
-            font-size: clamp(1.8rem, 4vw, 3rem); 
-            font-weight: 900;
-            color: var(--text-main); 
-            letter-spacing: -0.02em;
-            line-height: 1.25;
-            text-align: center;
-        }
-
-        .dynamic-padding { padding-left: 1.5rem; padding-right: 1.5rem; }
-        @media (min-width: 768px) { .dynamic-padding { padding-left: 5rem; padding-right: 5rem; } }
-        @media (min-width: 1024px) { .dynamic-padding { padding-left: 9rem; padding-right: 9rem; } }
-
-        .reveal, .focus-reveal-2s {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal.active, .focus-reveal-2s.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .focus-reveal-2s { filter: blur(20px); transform: scale(1.05); }
-        .focus-reveal-2s.active { filter: blur(0); transform: scale(1); }
-
-        /* 優化導航欄：採用 Glassmorphism 以利融合 */
-        .nav-editorial {
-            background: rgba(226, 226, 226, 0.7); /* 半透明背景 */
-            backdrop-filter: blur(15px); /* 背景模糊 */
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* 極細線條 */
-            width: 100%;
-            left: 0;
-        }
-
-        .nav-label {
-            font-size: clamp(9px, 2vw, 11px);
-            font-weight: 900; 
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: #000000; /* 改為黑色以配襯淺色 Bar */
-        }
-
-        /* 右上角時間 */
-        .clock-data { color: #000000; font-weight: 900; }
-
-        .footer-tagline {
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: -0.05em;
-            line-height: 0.9;
+            line-height: 1.55;
         }
 
         .watch-btn {
-            border: 2px solid #000;
-            padding: 10px 30px;
-            font-weight: 900;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            border: 1px solid #000;
+            padding: 8px 20px;
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            font-weight: 800;
             text-transform: uppercase;
-            background: var(--card-bg); 
+            background: transparent; 
             color: #000;
             cursor: pointer;
+            transition: all 0.25s ease;
         }
-        .watch-btn:hover { background: var(--card-bg); color: #000; }
+        .case-wrapper:hover .watch-btn {
+            background: #000;
+            color: #fff;
+        }
 
-        /* LinkedIn 按鈕：灰色背景，移除變色，保留輕微 Movement */
-        .footer-connect-btn {
-            position: relative;
-            z-index: 1;
-            display: inline-block;
-            font-size: clamp(1.2rem, 3vw, 2.5rem);
+        .body-copy-style {
+            font-size: clamp(1.5rem, 3.4vw, 2.65rem); 
             font-weight: 900;
+            color: var(--text-main); 
+            letter-spacing: -0.025em;
+            line-height: 1.28;
+        }
+
+        /* 漸現動畫 */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 履歷表：雜誌式橫向列表，大幅節省垂直空間 */
+        .exp-row {
+            border-bottom: 1px solid var(--border-hairline);
+            transition: background-color 0.25s ease, padding-left 0.3s ease;
+        }
+        .exp-row:first-child {
+            border-top: 1px solid var(--border-hairline);
+        }
+        .exp-row:hover {
+            background-color: rgba(0, 0, 0, 0.03);
+        }
+
+        /* Footer 按鈕 */
+        .footer-connect-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: clamp(1rem, 2.2vw, 1.5rem);
+            font-weight: 900;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
             color: #000;
-            padding: 1.5rem 2.5rem;
-            border: 4px solid #000;
+            padding: 1.15rem 2.25rem;
+            border: 1.5px solid #000;
             background-color: var(--card-bg); 
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .footer-connect-btn:hover {
-            background-color: var(--card-bg);
-            color: #000;
-            transform: translate(4px, -4px);
-            box-shadow: -5px 5px 0px 0px #000;
+            background-color: #000;
+            color: #fff;
+            transform: translateY(-3px);
         }
 
-        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-thumb { background: #000; }
     </style>
 </head>
 <body class="film-grain overflow-x-hidden w-full">
 
-    <nav class="nav-editorial fixed top-0 w-full z-[100] py-6 dynamic-padding flex justify-between items-center">
-        <div class="nav-label text-left">PORTFOLIO — SEAN LEUNG</div>
-        <div id="hkt-clock" class="nav-label clock-data text-right">00:00:00 HKT</div>
+    <!-- Top Editorial Navigation -->
+    <nav class="nav-editorial fixed top-0 w-full z-[100] py-4 md:py-5 dynamic-padding flex justify-between items-center">
+        <div class="flex items-center gap-4">
+            <a href="#" class="nav-label">SEAN LEUNG</a>
+        </div>
+
+        <div class="hidden lg:flex items-center gap-8">
+            <a href="#projects" class="nav-label hover:opacity-50 transition-opacity">Works (13)</a>
+            <a href="#about" class="nav-label hover:opacity-50 transition-opacity">Philosophy</a>
+            <a href="#experience" class="nav-label hover:opacity-50 transition-opacity">Experience</a>
+            <a href="#contact" class="nav-label hover:opacity-50 transition-opacity">Contact</a>
+        </div>
+
+        <div id="hkt-clock" class="nav-label text-right tabular-nums">00:00:00 HKT</div>
     </nav>
 
-    <!-- Section 1: Hero -->
-    <header class="min-h-screen flex flex-col justify-center items-center dynamic-padding overflow-hidden">
-        <div class="reveal">
-            <h1 class="title-monolith">
-                WORDS<br>
-                <span class="stroke-text">THAT WORK.</span><br>
-                IDEAS<br>
-                <span class="stroke-text">THAT MOVE.</span>
-            </h1>
+    <!-- Section 1: Hero + Bio Statement (移除 since 2013，文案充實度增加 30%) -->
+    <header class="pt-32 pb-20 md:pt-44 md:pb-28 dynamic-padding border-b border-black/15">
+        <div class="max-w-7xl mx-auto">
+            <div class="reveal flex flex-col items-center text-center">
+                <div class="mb-6 inline-flex items-center gap-2 border border-black/25 px-3.5 py-1 text-[10px] font-bold uppercase tracking-[0.22em]">
+                    <span>Creative Direction</span>
+                    <span class="text-black/30">/</span>
+                    <span>Integrated Copywriting</span>
+                </div>
+
+                <h1 class="title-monolith mb-12 md:mb-16">
+                    WORDS<br>
+                    <span class="stroke-text">THAT WORK.</span><br>
+                    IDEAS<br>
+                    <span class="stroke-text">THAT MOVE.</span>
+                </h1>
+
+                <div class="max-w-3xl pt-8 border-t border-black/15">
+                    <p class="text-base md:text-xl font-medium text-black/80 leading-relaxed text-pretty">
+                        A <span class="font-black text-black underline decoration-2 underline-offset-4">Copy-based Creative Director</span> transforming complex brand strategies into resonant human stories and culturally sharp campaigns across Hong Kong &amp; APAC. Blending rigorous strategic thinking with craft-driven emotional truth, creating high-impact work that earns genuine cultural talkability and business growth.
+                    </p>
+                </div>
+            </div>
         </div>
     </header>
 
-    <!-- Section 2: Body Copy -->
-    <section class="py-[50vh] flex flex-col items-center dynamic-padding overflow-hidden">
-        <div class="max-w-4xl body-copy-style focus-reveal-2s">
-            <p class="text-pretty text-center">
-                A <span class="stroke-text">Copy-based Creative</span>
-                <br>transforming complex strategies
-                <br>into resonant human stories
-                <br><span class="stroke-text">since 2013.</span>
-            </p>
-        </div>
-    </section>
-
-    <!-- Section 3: Selected Works (12 Projects) -->
-    <section id="projects" class="pb-0 dynamic-padding overflow-hidden text-left">
-        <div class="reveal pt-20 flex flex-col items-center mb-[50vh]">
-            <h2 class="title-monolith leading-none text-center">
-                SELECTED<br>
-                <span class="stroke-text">WORKS.</span>
-            </h2>
-        </div>
-
-        <div class="project-grid pb-[25vh]">
-            <!-- Case 01 -->
-            <div class="case-wrapper reveal">
-                <div class="img-wrapper"><img src="https://i.imgur.com/1iwUGaS.jpg" alt="Samsung Mirror" class="case-img"></div>
-                <div class="case-content">
-                    <div class="flex justify-between w-full items-center mb-4 px-2">
-                        <span class="text-[10px] md:text-xs font-black uppercase tracking-widest text-black/40">Samsung · Integrated Campaign</span>
-                        <span class="text-[10px] md:text-xs bg-black text-white px-2 py-0.5">01</span>
-                    </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">Unfold An Era</h3>
-                    <p class="case-description text-sm md:text-base leading-relaxed text-pretty text-center">Samsung's largest promotional campaign featuring MIRROR, redefining the brand's presence in the digital age.</p>
-                    <a href="https://drive.google.com/file/d/1wrZrxTB3UuLahXmldTf51NbAp3IeOChL/view?usp=drive_link" target="_blank" class="watch-btn mt-auto">Watch →</a>
+    <!-- Section 2: Selected Works (清晰劃分 3 大類別，共 13 個作品，移除年份) -->
+    <section id="projects" class="py-20 md:py-28 dynamic-padding border-b border-black/15">
+        <div class="max-w-7xl mx-auto">
+            
+            <!-- Section Header Bar -->
+            <div class="reveal flex flex-col md:flex-row justify-between items-start md:items-end mb-16 pb-6 border-b border-black">
+                <div>
+                    <span class="text-[11px] font-extrabold tracking-[0.25em] uppercase text-black/50 block mb-2">Index 01 — Portfolio Archive</span>
+                    <h2 class="section-header-title">
+                        SELECTED <span class="stroke-text">WORKS.</span>
+                    </h2>
                 </div>
-            </div>
-
-            <!-- Case 02 -->
-            <div class="case-wrapper reveal">
-                <div class="img-wrapper"><img src="https://i.imgur.com/BPLQfTQ.jpg" alt="Samsung Hins" class="case-img"></div>
-                <div class="case-content">
-                    <div class="flex justify-between w-full items-center mb-4 px-2">
-                        <span class="text-[10px] md:text-xs font-black uppercase tracking-widest text-black/40">Samsung · Branded Content</span>
-                        <span class="text-[10px] md:text-xs bg-black text-white px-2 py-0.5">02</span>
-                    </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">Imaging Reimagined</h3>
-                    <p class="case-description text-sm md:text-base leading-relaxed text-pretty text-center">Collaborating with Hins Cheung to create a "Mobile Film", showcasing cutting-edge smartphone imaging as a legitimate creative medium.</p>
-                    <a href="https://drive.google.com/file/d/1CHRnx4xG5Z7Sx4PxYwTPcjU9JWwtWlXs/view?usp=drive_link" target="_blank" class="watch-btn mt-auto">Watch →</a>
-                </div>
-            </div>
-
-            <!-- Case 03 -->
-            <div class="case-wrapper reveal">
-                <div class="img-wrapper"><img src="https://i.imgur.com/DOc8FB2.jpg" alt="Maxim Mid-Autumn" class="case-img"></div>
-                <div class="case-content">
-                    <div class="flex justify-between w-full items-center mb-4 px-2">
-                        <span class="text-[10px] md:text-xs font-black uppercase tracking-widest text-black/40">Maxim's · Brand Film</span>
-                        <span class="text-[10px] md:text-xs bg-black text-white px-2 py-0.5">03</span>
-                    </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">The Longing Heart</h3>
-                    <p class="case-description text-sm md:text-base leading-relaxed text-pretty text-center">An emotional mini-film portraying a daughter's longing for her father, emphasizing the value of family reunions.</p>
-                    <a href="https://drive.google.com/file/d/1f049ntfiTD1TW44xJoZr5maKTqRSuyli/view?usp=drive_link" target="_blank" class="watch-btn mt-auto">Watch →</a>
-                </div>
-            </div>
-
-            <!-- Case 04 -->
-            <div class="case-wrapper reveal">
-                <div class="img-wrapper"><img src="https://i.imgur.com/JZvt5z2.jpg" alt="Maxim CNY" class="case-img"></div>
-                <div class="case-content">
-                    <div class="flex justify-between w-full items-center mb-4 px-2">
-                        <span class="text-[10px] md:text-xs font-black uppercase tracking-widest text-black/40">Maxim's · Animated Commercial</span>
-                        <span class="text-[10px] md:text-xs bg-black text-white px-2 py-0.5">04</span>
-                    </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">Festive Spirit Animated</h3>
-                    <p class="case-description text-sm md:text-base leading-relaxed text-pretty text-center">Collaborated with a Japanese animation studio to create a high-quality CNY ad for Hong Kong.</p>
-                    <a href="https://drive.google.com/file/d/1XmiX2qTG5LX1cGZol1JRoAXZcrmkx-1m/view?usp=drive_link" target="_blank" class="watch-btn mt-auto">Watch →</a>
-                </div>
-            </div>
-
-            <!-- Case 05 -->
-            <div class="case-wrapper reveal">
-                <div class="img-wrapper"><img src="https://i.imgur.com/dBcgRPw.jpg" alt="Hang Seng Sandra Ng" class="case-img"></div>
-                <div class="case-content">
-                    <div class="flex justify-between w-full items-center mb-4 px-2">
-                        <span class="text-[10px] md:text-xs font-black uppercase tracking-widest text-black/40">Hang Seng Bank · Thematic Campaign</span>
-                        <span class="text-[10px] md:text-xs bg-black text-white px-2 py-0.5">05</span>
-                    </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">The Chief Family Officer</h3>
-                    <p class="case-description text-sm md:text-base leading-relaxed text-pretty text-center">Featuring Sandra Ng and her family, promoting Prestige Family+ services to a wider audience base.</p>
-                    <a href="https://drive.google.com/file/d/1igfEBW1BElEz6Eu6XIpsZqBPoZQRZrYf/view?usp=drive_link" target="_blank" class="watch-btn mt-auto">Watch →</a>
-                </div>
-            </div>
-
-            <!-- Case 06 -->
-            <div class="case-wrapper reveal">
-                <div class="img-wrapper"><img src="https://i.imgur.com/GOqjK7R.jpg" alt="HSBC Premier" class="case-img"></div>
-                <div class="case-content">
-                    <div class="flex justify-between w-full items-center mb-4 px-2">
-                        <span class="text-[10px] md:text-xs font-black uppercase tracking-widest text-black/40">HSBC · Thematic Campaign</span>
-                        <span class="text-[10px] md:text-xs bg-black text-white px-2 py-0.5">06</span>
-                    </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">Premier Excellence</h3>
-                    <p class="case-description text-sm md:text-base leading-relaxed text-pretty text-center">Developing a compelling commercial targeting high-net-worth individuals to drive strategic growth among elite segments.</p>
-                    <a href="https://drive.google.com/file/d/1ATPOF6SPxRdBiomDT9j3LhJ5OKL1vuIl/view?usp=drive_link" target="_blank" class="watch-btn mt-auto">Watch →</a>
-                </div>
-            </div>
-
-            <!-- Case 07 -->
-            <div class="case-wrapper reveal">
-                <div class="img-wrapper"><img src="https://i.imgur.com/VO14CvK.jpg" alt="Prudential" class="case-img"></div>
-                <div class="case-content">
-                    <div class="flex justify-between w-full items-center mb-4 px-2">
-                        <span class="text-[10px] md:text-xs font-black uppercase tracking-widest text-black/40">Prudential · Integrated Campaign</span>
-                        <span class="text-[10px] md:text-xs bg-black text-white px-2 py-0.5">07</span>
-                    </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">A Human Promise</h3>
-                    <p class="case-description text-sm md:text-base leading-relaxed text-pretty text-center">Featuring Terence Lam, distilling the brief into a human promise: "Support when you need it most."</p>
-                    <a href="https://drive.google.com/file/d/1Vki7-prFtcPOpWru72hMubrfbI8JR8HZ/view?usp=drive_link" target="_blank" class="watch-btn mt-auto">Watch →</a>
-                </div>
-            </div>
-
-            <!-- Case 08 -->
-            <div class="case-wrapper reveal">
-                <div class="img-wrapper"><img src="https://i.imgur.com/gvLFKN8.jpg" alt="TamJai SamGor" class="case-img"></div>
-                <div class="case-content">
-                    <div class="flex justify-between w-full items-center mb-4 px-2">
-                        <span class="text-[10px] md:text-xs font-black uppercase tracking-widest text-black/40">TamJai SamGor · Anniversary Campaign</span>
-                        <span class="text-[10px] md:text-xs bg-black text-white px-2 py-0.5">08</span>
-                    </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">Keep on Spicing Up</h3>
-                    <p class="case-description text-sm md:text-base leading-relaxed text-pretty text-center">Celebrating a legacy of local flavor and perseverance through a powerful thematic execution.</p>
-                    <a href="https://drive.google.com/file/d/16N7mWfCL_-3SWcNWwowN7L5NsHasgg23/view?usp=drive_link" target="_blank" class="watch-btn mt-auto">Watch →</a>
-                </div>
-            </div>
-
-            <!-- Case 09 -->
-            <div class="case-wrapper reveal">
-                <div class="img-wrapper"><img src="https://i.imgur.com/LP3gGLM.jpg" alt="TamJai SamGor Jeffrey" class="case-img"></div>
-                <div class="case-content">
-                    <div class="flex justify-between w-full items-center mb-4 px-2">
-                        <span class="text-[10px] md:text-xs font-black uppercase tracking-widest text-black/40">TamJai SamGor · Branded Music Video</span>
-                        <span class="text-[10px] md:text-xs bg-black text-white px-2 py-0.5">09</span>
-                    </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">Never Say Never</h3>
-                    <p class="case-description text-sm md:text-base leading-relaxed text-pretty text-center">Collaborating with Jeffrey Ngai to shoot a music video in Japan, injecting fresh international appeal.</p>
-                    <a href="https://drive.google.com/file/d/1Qwk88B7mV4eJmeQI3UmLj0nftvFEk7fT/view?usp=drive_link" target="_blank" class="watch-btn mt-auto">Watch →</a>
-                </div>
-            </div>
-
-            <!-- Case 10 -->
-            <div class="case-wrapper reveal">
-                <div class="img-wrapper"><img src="https://i.imgur.com/QiTfKcm.jpg" alt="Ocean Park Halloween" class="case-img"></div>
-                <div class="case-content">
-                    <div class="flex justify-between w-full items-center mb-4 px-2">
-                        <span class="text-[10px] md:text-xs font-black uppercase tracking-widest text-black/40">Ocean Park · Campaign Film</span>
-                        <span class="text-[10px] md:text-xs bg-black text-white px-2 py-0.5">10</span>
-                    </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">Exhilarating Spookiness</h3>
-                    <p class="case-description text-sm md:text-base leading-relaxed text-pretty text-center">Crafting a high-quality video that captures the exhilarating essence of Halloween.</p>
-                    <a href="https://drive.google.com/file/d/17Ox2akvC1h9QOArMKsZiHtEEeu1WfH-T/view?usp=drive_link" target="_blank" class="watch-btn mt-auto">Watch →</a>
-                </div>
-            </div>
-
-            <!-- Case 11 -->
-            <div class="case-wrapper reveal">
-                <div class="img-wrapper"><img src="https://i.imgur.com/uhvWN9T.jpg" alt="MTR 45th" class="case-img"></div>
-                <div class="case-content">
-                    <div class="flex justify-between w-full items-center mb-4 px-2">
-                        <span class="text-[10px] md:text-xs font-black uppercase tracking-widest text-black/40">MTR · Anniversary Campaign</span>
-                        <span class="text-[10px] md:text-xs bg-black text-white px-2 py-0.5">11</span>
-                    </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">Brighter Tomorrow</h3>
-                    <p class="case-description text-sm md:text-base leading-relaxed text-pretty text-center">Partnering with YOLICA to refresh MTR's image for its 45th anniversary.</p>
-                    <a href="https://drive.google.com/file/d/116fc0iNDhanW--aBPbtTBpI0VuRtoYJMb/view?usp=drive_link" target="_blank" class="watch-btn mt-auto">Watch →</a>
-                </div>
-            </div>
-
-            <!-- Case 12 -->
-            <div class="case-wrapper reveal">
-                <div class="img-wrapper"><img src="https://i.imgur.com/Xcriccb.jpg" alt="InstaMockExam" class="case-img"></div>
-                <div class="case-content">
-                    <div class="flex justify-between w-full items-center mb-4 px-2">
-                        <span class="text-[10px] md:text-xs font-black uppercase tracking-widest text-black/40">Hang Seng Bank · Social Activation</span>
-                        <span class="text-[10px] md:text-xs bg-black text-white px-2 py-0.5">12</span>
-                    </div>
-                    <h3 class="text-2xl md:text-3xl font-black mb-4 uppercase text-center w-full">InstaMockExam</h3>
-                    <p class="case-description text-sm md:text-base leading-relaxed text-pretty text-center">Developing an innovative social media activation that earned my first Kam Fan Gold Award.</p>
-                    <a href="https://drive.google.com/file/d/1-DHVXuTlGvvQz3biohF2MOX0QQkWR_wO/view?usp=drive_link" target="_blank" class="watch-btn mt-auto">Watch →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 4: Philosophy & Experience -->
-    <section id="about" class="pt-[25vh] pb-20 dynamic-padding overflow-hidden">
-        <div class="reveal mb-[50vh] flex flex-col items-center">
-            <h2 class="title-monolith text-center">STRATEGIC<br><span class="stroke-text">NARRATIVES.</span></h2>
-        </div>
-
-        <div class="flex flex-col items-center">
-            <div class="max-w-4xl body-copy-style focus-reveal-2s mb-[50vh]">
-                <p class="text-pretty text-center">
-                    Bridging <span class="stroke-text">business logic</span>
-                    <br>with <span class="stroke-text">human emotion.</span>
-                    <br>A decade of <span class="stroke-text">storytelling</span>
-                    <br>for iconic local brands.
-                    <br>Proving that work
-                    <br>doesn’t just look cool
-                    <br><span class="stroke-text">— it performs.</span>
+                <p class="text-xs md:text-sm font-semibold uppercase tracking-[0.15em] text-black/60 mt-4 md:mt-0">
+                    13 Featured Campaigns
                 </p>
             </div>
 
-            <div class="reveal mb-[25vh] flex flex-col items-center">
-                <h2 class="title-monolith text-center">WORK<br><span class="stroke-text">EXPERIENCE.</span></h2>
+            <!-- CATEGORY 01: Integrated & Thematic (5 Works) -->
+            <div class="mb-24">
+                <div class="reveal flex items-center justify-between border-b border-black/25 pb-3 mb-10">
+                    <div class="flex items-center gap-3">
+                        <span class="bg-black text-white px-2 py-0.5 text-[10px] font-black uppercase tracking-wider">01</span>
+                        <h3 class="text-xs md:text-sm font-black uppercase tracking-[0.2em] text-black">Integrated &amp; Thematic</h3>
+                    </div>
+                    <span class="text-[11px] font-bold tracking-widest text-black/50 uppercase">5 Works</span>
+                </div>
+
+                <div class="project-grid">
+                    <!-- Case 01 -->
+                    <article class="case-wrapper reveal">
+                        <div>
+                            <div class="flex justify-between w-full items-center mb-3">
+                                <span class="text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.16em] text-black/55">Samsung · Integrated Campaign</span>
+                                <span class="text-[11px] font-black border border-black px-2 py-0.5 tabular-nums">01</span>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="https://i.imgur.com/1iwUGaS.jpg" alt="Samsung Mirror" loading="lazy" class="case-img">
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black mb-2.5 uppercase tracking-tight text-left">Unfold An Era</h3>
+                            <p class="case-description text-sm leading-relaxed text-left mb-6">Samsung's largest promotional campaign featuring MIRROR, redefining the brand's presence in the digital age.</p>
+                        </div>
+                        <div class="flex justify-start">
+                            <a href="https://drive.google.com/file/d/1wrZrxTB3UuLahXmldTf51NbAp3IeOChL/view?usp=drive_link" target="_blank" rel="noopener" class="watch-btn">Watch Film <span>↗</span></a>
+                        </div>
+                    </article>
+
+                    <!-- Case 02 (Hang Seng Sandra Ng) -->
+                    <article class="case-wrapper reveal">
+                        <div>
+                            <div class="flex justify-between w-full items-center mb-3">
+                                <span class="text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.16em] text-black/55">Hang Seng Bank · Thematic Campaign</span>
+                                <span class="text-[11px] font-black border border-black px-2 py-0.5 tabular-nums">02</span>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="https://i.imgur.com/dBcgRPw.jpg" alt="Hang Seng Sandra Ng" loading="lazy" class="case-img">
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black mb-2.5 uppercase tracking-tight text-left">The Chief Family Officer</h3>
+                            <p class="case-description text-sm leading-relaxed text-left mb-6">Featuring Sandra Ng and her family, promoting Prestige Family+ services to a wider audience base.</p>
+                        </div>
+                        <div class="flex justify-start">
+                            <a href="https://drive.google.com/file/d/1igfEBW1BElEz6Eu6XIpsZqBPoZQRZrYf/view?usp=drive_link" target="_blank" rel="noopener" class="watch-btn">Watch Film <span>↗</span></a>
+                        </div>
+                    </article>
+
+                    <!-- Case 03 (HSBC Premier) -->
+                    <article class="case-wrapper reveal">
+                        <div>
+                            <div class="flex justify-between w-full items-center mb-3">
+                                <span class="text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.16em] text-black/55">HSBC · Thematic Campaign</span>
+                                <span class="text-[11px] font-black border border-black px-2 py-0.5 tabular-nums">03</span>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="https://i.imgur.com/GOqjK7R.jpg" alt="HSBC Premier" loading="lazy" class="case-img">
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black mb-2.5 uppercase tracking-tight text-left">Premier Excellence</h3>
+                            <p class="case-description text-sm leading-relaxed text-left mb-6">Developing a compelling commercial targeting high-net-worth individuals to drive strategic growth among elite segments.</p>
+                        </div>
+                        <div class="flex justify-start">
+                            <a href="https://drive.google.com/file/d/1ATPOF6SPxRdBiomDT9j3LhJ5OKL1vuIl/view?usp=drive_link" target="_blank" rel="noopener" class="watch-btn">Watch Film <span>↗</span></a>
+                        </div>
+                    </article>
+
+                    <!-- Case 04 (Prudential) -->
+                    <article class="case-wrapper reveal">
+                        <div>
+                            <div class="flex justify-between w-full items-center mb-3">
+                                <span class="text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.16em] text-black/55">Prudential · Integrated Campaign</span>
+                                <span class="text-[11px] font-black border border-black px-2 py-0.5 tabular-nums">04</span>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="https://i.imgur.com/VO14CvK.jpg" alt="Prudential" loading="lazy" class="case-img">
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black mb-2.5 uppercase tracking-tight text-left">A Human Promise</h3>
+                            <p class="case-description text-sm leading-relaxed text-left mb-6">Featuring Terence Lam, distilling the brief into a human promise: "Support when you need it most."</p>
+                        </div>
+                        <div class="flex justify-start">
+                            <a href="https://drive.google.com/file/d/1Vki7-prFtcPOpWru72hMubrfbI8JR8HZ/view?usp=drive_link" target="_blank" rel="noopener" class="watch-btn">Watch Film <span>↗</span></a>
+                        </div>
+                    </article>
+
+                    <!-- Case 05 (MTR) -->
+                    <article class="case-wrapper reveal">
+                        <div>
+                            <div class="flex justify-between w-full items-center mb-3">
+                                <span class="text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.16em] text-black/55">MTR · Anniversary Campaign</span>
+                                <span class="text-[11px] font-black border border-black px-2 py-0.5 tabular-nums">05</span>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="https://i.imgur.com/uhvWN9T.jpg" alt="MTR 45th" loading="lazy" class="case-img">
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black mb-2.5 uppercase tracking-tight text-left">Brighter Tomorrow</h3>
+                            <p class="case-description text-sm leading-relaxed text-left mb-6">Partnering with YOLICA to refresh MTR's image for its 45th anniversary.</p>
+                        </div>
+                        <div class="flex justify-start">
+                            <a href="https://drive.google.com/file/d/116fc0iNDhanW--aBPbtTBpI0VuRtoYJMb/view?usp=drive_link" target="_blank" rel="noopener" class="watch-btn">Watch Film <span>↗</span></a>
+                        </div>
+                    </article>
+                </div>
             </div>
-            
-            <div class="space-y-24 w-full max-w-4xl pb-40">
-                <div class="group pb-12 reveal flex flex-col items-center border-b-2 border-black/5">
-                    <div class="text-sm font-bold tracking-[0.3em] text-black/60 mb-6 uppercase text-center">Jan 2026 — Present</div>
-                    <span class="text-xl md:text-3xl font-black uppercase text-black/80 mb-2">Narrow Door</span>
-                    <span class="text-xl md:text-3xl font-black uppercase bg-black text-white px-4 py-1">Creative Director</span>
+
+            <!-- CATEGORY 02: Films & Branded Entertainment (4 Works) -->
+            <div class="mb-24">
+                <div class="reveal flex items-center justify-between border-b border-black/25 pb-3 mb-10">
+                    <div class="flex items-center gap-3">
+                        <span class="bg-black text-white px-2 py-0.5 text-[10px] font-black uppercase tracking-wider">02</span>
+                        <h3 class="text-xs md:text-sm font-black uppercase tracking-[0.2em] text-black">Films &amp; Branded Entertainment</h3>
+                    </div>
+                    <span class="text-[11px] font-bold tracking-widest text-black/50 uppercase">4 Works</span>
                 </div>
-                <div class="group pb-12 reveal flex flex-col items-center border-b-2 border-black/5">
-                    <div class="text-sm font-bold tracking-[0.3em] text-black/60 mb-6 uppercase text-center">Aug 2025 — Dec 2025</div>
-                    <span class="text-xl md:text-3xl font-black uppercase text-black/80 mb-2">Secret Tour Hong Kong</span>
-                    <span class="text-xl md:text-3xl font-black uppercase bg-black text-white px-4 py-1">Freelance Creative</span>
+
+                <div class="project-grid">
+                    <!-- Case 06 (Samsung Hins) -->
+                    <article class="case-wrapper reveal">
+                        <div>
+                            <div class="flex justify-between w-full items-center mb-3">
+                                <span class="text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.16em] text-black/55">Samsung · Branded Content</span>
+                                <span class="text-[11px] font-black border border-black px-2 py-0.5 tabular-nums">06</span>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="https://i.imgur.com/BPLQfTQ.jpg" alt="Samsung Hins" loading="lazy" class="case-img">
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black mb-2.5 uppercase tracking-tight text-left">Imaging Reimagined</h3>
+                            <p class="case-description text-sm leading-relaxed text-left mb-6">Collaborating with Hins Cheung to create a "Mobile Film", showcasing cutting-edge smartphone imaging as a legitimate creative medium.</p>
+                        </div>
+                        <div class="flex justify-start">
+                            <a href="https://drive.google.com/file/d/1CHRnx4xG5Z7Sx4PxYwTPcjU9JWwtWlXs/view?usp=drive_link" target="_blank" rel="noopener" class="watch-btn">Watch Film <span>↗</span></a>
+                        </div>
+                    </article>
+
+                    <!-- Case 07 (Maxim's Mid-Autumn) -->
+                    <article class="case-wrapper reveal">
+                        <div>
+                            <div class="flex justify-between w-full items-center mb-3">
+                                <span class="text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.16em] text-black/55">Maxim's · Brand Film</span>
+                                <span class="text-[11px] font-black border border-black px-2 py-0.5 tabular-nums">07</span>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="https://i.imgur.com/DOc8FB2.jpg" alt="Maxim Mid-Autumn" loading="lazy" class="case-img">
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black mb-2.5 uppercase tracking-tight text-left">The Longing Heart</h3>
+                            <p class="case-description text-sm leading-relaxed text-left mb-6">An emotional mini-film portraying a daughter's longing for her father, emphasizing the value of family reunions.</p>
+                        </div>
+                        <div class="flex justify-start">
+                            <a href="https://drive.google.com/file/d/1f049ntfiTD1TW44xJoZr5maKTqRSuyli/view?usp=drive_link" target="_blank" rel="noopener" class="watch-btn">Watch Film <span>↗</span></a>
+                        </div>
+                    </article>
+
+                    <!-- Case 08 (Maxim CNY) -->
+                    <article class="case-wrapper reveal">
+                        <div>
+                            <div class="flex justify-between w-full items-center mb-3">
+                                <span class="text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.16em] text-black/55">Maxim's · Animated Commercial</span>
+                                <span class="text-[11px] font-black border border-black px-2 py-0.5 tabular-nums">08</span>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="https://i.imgur.com/JZvt5z2.jpg" alt="Maxim CNY" loading="lazy" class="case-img">
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black mb-2.5 uppercase tracking-tight text-left">Festive Spirit Animated</h3>
+                            <p class="case-description text-sm leading-relaxed text-left mb-6">Collaborated with a Japanese animation studio to create a high-quality CNY ad for Hong Kong.</p>
+                        </div>
+                        <div class="flex justify-start">
+                            <a href="https://drive.google.com/file/d/1XmiX2qTG5LX1cGZol1JRoAXZcrmkx-1m/view?usp=drive_link" target="_blank" rel="noopener" class="watch-btn">Watch Film <span>↗</span></a>
+                        </div>
+                    </article>
+
+                    <!-- Case 09 (TamJai Jeffrey) -->
+                    <article class="case-wrapper reveal">
+                        <div>
+                            <div class="flex justify-between w-full items-center mb-3">
+                                <span class="text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.16em] text-black/55">TamJai SamGor · Branded Music Video</span>
+                                <span class="text-[11px] font-black border border-black px-2 py-0.5 tabular-nums">09</span>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="https://i.imgur.com/LP3gGLM.jpg" alt="TamJai SamGor Jeffrey" loading="lazy" class="case-img">
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black mb-2.5 uppercase tracking-tight text-left">Never Say Never</h3>
+                            <p class="case-description text-sm leading-relaxed text-left mb-6">Collaborating with Jeffrey Ngai to shoot a music video in Japan, injecting fresh international appeal.</p>
+                        </div>
+                        <div class="flex justify-start">
+                            <a href="https://drive.google.com/file/d/1Qwk88B7mV4eJmeQI3UmLj0nftvFEk7fT/view?usp=drive_link" target="_blank" rel="noopener" class="watch-btn">Watch Film <span>↗</span></a>
+                        </div>
+                    </article>
                 </div>
-                <div class="group pb-12 reveal flex flex-col items-center border-b-2 border-black/5">
-                    <div class="text-sm font-bold tracking-[0.3em] text-black/60 mb-6 uppercase text-center">Jan 2025 — Aug 2025</div>
-                    <span class="text-xl md:text-3xl font-black uppercase text-black/80 mb-2">Publicis Hong Kong</span>
-                    <span class="text-xl md:text-3xl font-black uppercase bg-black text-white px-4 py-1">Freelance Creative</span>
+            </div>
+
+            <!-- CATEGORY 03: Cultural Impact & Activation (4 Works) -->
+            <div>
+                <div class="reveal flex items-center justify-between border-b border-black/25 pb-3 mb-10">
+                    <div class="flex items-center gap-3">
+                        <span class="bg-black text-white px-2 py-0.5 text-[10px] font-black uppercase tracking-wider">03</span>
+                        <h3 class="text-xs md:text-sm font-black uppercase tracking-[0.2em] text-black">Cultural Impact &amp; Activation</h3>
+                    </div>
+                    <span class="text-[11px] font-bold tracking-widest text-black/50 uppercase">4 Works</span>
                 </div>
-                <div class="group pb-12 reveal flex flex-col items-center border-b-2 border-black/5">
-                    <div class="text-sm font-bold tracking-[0.3em] text-black/60 mb-6 uppercase text-pretty text-center">May 2019 — Dec 2024</div>
-                    <span class="text-xl md:text-3xl font-black uppercase text-black/80 mb-2">The Bread Digital</span>
-                    <span class="text-xl md:text-3xl font-black uppercase bg-black text-white px-4 py-1">Associate Creative Director</span>
+
+                <div class="project-grid">
+                    <!-- Case 10 (TamJai SamGor) -->
+                    <article class="case-wrapper reveal">
+                        <div>
+                            <div class="flex justify-between w-full items-center mb-3">
+                                <span class="text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.16em] text-black/55">TamJai SamGor · Anniversary Campaign</span>
+                                <span class="text-[11px] font-black border border-black px-2 py-0.5 tabular-nums">10</span>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="https://i.imgur.com/gvLFKN8.jpg" alt="TamJai SamGor" loading="lazy" class="case-img">
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black mb-2.5 uppercase tracking-tight text-left">Keep on Spicing Up</h3>
+                            <p class="case-description text-sm leading-relaxed text-left mb-6">Celebrating a legacy of local flavor and perseverance through a powerful thematic execution.</p>
+                        </div>
+                        <div class="flex justify-start">
+                            <a href="https://drive.google.com/file/d/16N7mWfCL_-3SWcNWwowN7L5NsHasgg23/view?usp=drive_link" target="_blank" rel="noopener" class="watch-btn">Watch Film <span>↗</span></a>
+                        </div>
+                    </article>
+
+                    <!-- Case 11 (Ocean Park) -->
+                    <article class="case-wrapper reveal">
+                        <div>
+                            <div class="flex justify-between w-full items-center mb-3">
+                                <span class="text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.16em] text-black/55">Ocean Park · Campaign Film</span>
+                                <span class="text-[11px] font-black border border-black px-2 py-0.5 tabular-nums">11</span>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="https://i.imgur.com/QiTfKcm.jpg" alt="Ocean Park Halloween" loading="lazy" class="case-img">
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black mb-2.5 uppercase tracking-tight text-left">Exhilarating Spookiness</h3>
+                            <p class="case-description text-sm leading-relaxed text-left mb-6">Crafting a high-quality video that captures the exhilarating essence of Halloween.</p>
+                        </div>
+                        <div class="flex justify-start">
+                            <a href="https://drive.google.com/file/d/17Ox2akvC1h9QOArMKsZiHtEEeu1WfH-T/view?usp=drive_link" target="_blank" rel="noopener" class="watch-btn">Watch Film <span>↗</span></a>
+                        </div>
+                    </article>
+
+                    <!-- Case 12 (InstaMockExam) -->
+                    <article class="case-wrapper reveal">
+                        <div>
+                            <div class="flex justify-between w-full items-center mb-3">
+                                <span class="text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.16em] text-black/55">Hang Seng Bank · Social Activation</span>
+                                <span class="text-[11px] font-black border border-black px-2 py-0.5 tabular-nums">12</span>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="https://i.imgur.com/Xcriccb.jpg" alt="InstaMockExam" loading="lazy" class="case-img">
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black mb-2.5 uppercase tracking-tight text-left">InstaMockExam</h3>
+                            <p class="case-description text-sm leading-relaxed text-left mb-6">Developing an innovative social media activation that earned my first Kam Fan Gold Award.</p>
+                        </div>
+                        <div class="flex justify-start">
+                            <a href="https://drive.google.com/file/d/1-DHVXuTlGvvQz3biohF2MOX0QQkWR_wO/view?usp=drive_link" target="_blank" rel="noopener" class="watch-btn">Watch Film <span>↗</span></a>
+                        </div>
+                    </article>
+
+                    <!-- Case 13 (INDICAID) -->
+                    <article class="case-wrapper reveal">
+                        <div>
+                            <div class="flex justify-between w-full items-center mb-3">
+                                <span class="text-[10px] md:text-[11px] font-extrabold uppercase tracking-[0.16em] text-black/55">INDICAID · Integrated OOH</span>
+                                <span class="text-[11px] font-black border border-black px-2 py-0.5 tabular-nums">13</span>
+                            </div>
+                            <div class="img-wrapper">
+                                <img src="https://i.ibb.co/JPf24DD/aedd9d72d7a37e9cf724744d40662548771c8e3763e7e942dfdc5ce1c31843f3.png" alt="INDICAID Don't Trust, Test" loading="lazy" class="case-img">
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-black mb-2.5 uppercase tracking-tight text-left">DON'T TRUST, TEST</h3>
+                            <p class="case-description text-sm leading-relaxed text-left mb-6">Turning a viral controversy into a provocative campaign that reframed HPV testing as self-protection.</p>
+                        </div>
+                        <div class="flex justify-start">
+                            <a href="https://www.marketing-interactive.com/indicaid-turns-hpv-controversy-into-call-for-sexual-health-accountability" target="_blank" rel="noopener" class="watch-btn">Read Press <span>↗</span></a>
+                        </div>
+                    </article>
                 </div>
-                <div class="group pb-12 reveal flex flex-col items-center border-b-2 border-black/5">
-                    <div class="text-sm font-bold tracking-[0.3em] text-black/60 mb-6 uppercase text-pretty text-center">Sep 2017 — May 2019</div>
-                    <span class="text-xl md:text-3xl font-black uppercase text-black/80 mb-2">Dentsu McGarryBowen</span>
-                    <span class="text-xl md:text-3xl font-black uppercase bg-black text-white px-4 py-1">Senior Copywriter</span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section 3: Strategic Philosophy -->
+    <!-- Section 4: Work Experience (升級為雜誌式橫向履歷表，清晰呈現 MSL 現職及 Narrow Door 紀錄) -->
+    <section id="experience" class="py-20 md:py-28 dynamic-padding border-b border-black/15">
+        <div class="max-w-6xl mx-auto">
+            <div class="reveal flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16">
+                <div>
+                    <span class="text-[11px] font-extrabold tracking-[0.25em] uppercase text-black/50 block mb-2">Index 03 — Career Track</span>
+                    <h2 class="section-header-title">
+                        WORK <span class="stroke-text">EXPERIENCE.</span>
+                    </h2>
                 </div>
-                <div class="group pb-12 reveal flex flex-col items-center">
-                    <div class="text-sm font-bold tracking-[0.3em] text-black/60 mb-6 uppercase text-pretty text-center">Feb 2017 — Sep 2017</div>
-                    <span class="text-xl md:text-3xl font-black uppercase text-black/80 mb-2">DDB Hong Kong</span>
-                    <span class="text-xl md:text-3xl font-black uppercase bg-black text-white px-4 py-1">Senior Copywriter</span>
+                <p class="text-xs md:text-sm font-semibold uppercase tracking-[0.15em] text-black/60 mt-4 md:mt-0">
+                    2013 — Present · Hong Kong
+                </p>
+            </div>
+
+            <div class="w-full">
+                <!-- Job 1: MSL (New Current Role) -->
+                <div class="exp-row reveal py-6 md:py-7 px-2 md:px-4 grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 items-start md:items-center">
+                    <div class="md:col-span-4 flex items-center gap-3">
+                        <span class="w-2 h-2 rounded-full bg-black inline-block"></span>
+                        <span class="text-xs md:text-sm font-extrabold tracking-[0.2em] uppercase text-black tabular-nums">Jun 2026 — Present</span>
+                    </div>
+                    <div class="md:col-span-4 text-left">
+                        <span class="text-xl md:text-2xl font-black uppercase tracking-tight text-black">MSL</span>
+                    </div>
+                    <div class="md:col-span-4 flex md:justify-end mt-1 md:mt-0">
+                        <span class="text-xs md:text-sm font-black uppercase tracking-wider bg-black text-white px-3.5 py-1.5">Creative Director</span>
+                    </div>
+                </div>
+
+                <!-- Job 2: Narrow Door (Updated End Date) -->
+                <div class="exp-row reveal py-6 md:py-7 px-2 md:px-4 grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 items-start md:items-center">
+                    <div class="md:col-span-4">
+                        <span class="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-black/60 tabular-nums">Jan 2026 — Jun 2026</span>
+                    </div>
+                    <div class="md:col-span-4 text-left">
+                        <span class="text-xl md:text-2xl font-black uppercase tracking-tight text-black/85">Narrow Door</span>
+                    </div>
+                    <div class="md:col-span-4 flex md:justify-end mt-1 md:mt-0">
+                        <span class="text-xs md:text-sm font-extrabold uppercase tracking-wider border border-black px-3.5 py-1">Creative Director</span>
+                    </div>
+                </div>
+
+                <!-- Job 3 -->
+                <div class="exp-row reveal py-6 md:py-7 px-2 md:px-4 grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 items-start md:items-center">
+                    <div class="md:col-span-4">
+                        <span class="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-black/60 tabular-nums">Aug 2025 — Dec 2025</span>
+                    </div>
+                    <div class="md:col-span-4 text-left">
+                        <span class="text-xl md:text-2xl font-black uppercase tracking-tight text-black/85">Secret Tour Hong Kong</span>
+                    </div>
+                    <div class="md:col-span-4 flex md:justify-end mt-1 md:mt-0">
+                        <span class="text-xs md:text-sm font-extrabold uppercase tracking-wider border border-black/40 text-black/80 px-3.5 py-1">Freelance Creative</span>
+                    </div>
+                </div>
+
+                <!-- Job 4 -->
+                <div class="exp-row reveal py-6 md:py-7 px-2 md:px-4 grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 items-start md:items-center">
+                    <div class="md:col-span-4">
+                        <span class="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-black/60 tabular-nums">Jan 2025 — Aug 2025</span>
+                    </div>
+                    <div class="md:col-span-4 text-left">
+                        <span class="text-xl md:text-2xl font-black uppercase tracking-tight text-black/85">Publicis Hong Kong</span>
+                    </div>
+                    <div class="md:col-span-4 flex md:justify-end mt-1 md:mt-0">
+                        <span class="text-xs md:text-sm font-extrabold uppercase tracking-wider border border-black/40 text-black/80 px-3.5 py-1">Freelance Creative</span>
+                    </div>
+                </div>
+
+                <!-- Job 5 -->
+                <div class="exp-row reveal py-6 md:py-7 px-2 md:px-4 grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 items-start md:items-center">
+                    <div class="md:col-span-4">
+                        <span class="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-black/60 tabular-nums">May 2019 — Dec 2024</span>
+                    </div>
+                    <div class="md:col-span-4 text-left">
+                        <span class="text-xl md:text-2xl font-black uppercase tracking-tight text-black/85">The Bread Digital</span>
+                    </div>
+                    <div class="md:col-span-4 flex md:justify-end mt-1 md:mt-0">
+                        <span class="text-xs md:text-sm font-extrabold uppercase tracking-wider border border-black/40 text-black/80 px-3.5 py-1">Associate Creative Director</span>
+                    </div>
+                </div>
+
+                <!-- Job 6 -->
+                <div class="exp-row reveal py-6 md:py-7 px-2 md:px-4 grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 items-start md:items-center">
+                    <div class="md:col-span-4">
+                        <span class="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-black/60 tabular-nums">Sep 2017 — May 2019</span>
+                    </div>
+                    <div class="md:col-span-4 text-left">
+                        <span class="text-xl md:text-2xl font-black uppercase tracking-tight text-black/85">Dentsu McGarryBowen</span>
+                    </div>
+                    <div class="md:col-span-4 flex md:justify-end mt-1 md:mt-0">
+                        <span class="text-xs md:text-sm font-extrabold uppercase tracking-wider border border-black/40 text-black/80 px-3.5 py-1">Senior Copywriter</span>
+                    </div>
+                </div>
+
+                <!-- Job 7 -->
+                <div class="exp-row reveal py-6 md:py-7 px-2 md:px-4 grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 items-start md:items-center">
+                    <div class="md:col-span-4">
+                        <span class="text-xs md:text-sm font-bold tracking-[0.2em] uppercase text-black/60 tabular-nums">Feb 2017 — Sep 2017</span>
+                    </div>
+                    <div class="md:col-span-4 text-left">
+                        <span class="text-xl md:text-2xl font-black uppercase tracking-tight text-black/85">DDB Hong Kong</span>
+                    </div>
+                    <div class="md:col-span-4 flex md:justify-end mt-1 md:mt-0">
+                        <span class="text-xs md:text-sm font-extrabold uppercase tracking-wider border border-black/40 text-black/80 px-3.5 py-1">Senior Copywriter</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer id="contact" class="py-60 text-center flex flex-col items-center overflow-hidden">
-        <div class="reveal px-4 pb-12 text-center w-full">
-            <h2 class="footer-tagline text-3xl md:text-[6.5rem] mb-16 leading-[0.85] text-black text-center text-pretty">
+    <footer id="contact" class="py-28 md:py-36 dynamic-padding text-center flex flex-col items-center">
+        <div class="reveal max-w-5xl mx-auto w-full">
+            <span class="text-[11px] font-extrabold tracking-[0.25em] uppercase text-black/50 block mb-5">Index 04 — Initiate Dialogue</span>
+            <h2 class="title-monolith !text-[clamp(2.4rem,8vw,6.5rem)] mb-12 text-black text-pretty">
                 LET'S CRAFT<br><span class="stroke-text">THE NEXT STORY.</span>
             </h2>
             <div class="flex flex-col items-center">
-                <a href="https://www.linkedin.com/in/leungsean" target="_blank" class="footer-connect-btn">
-                    Connect on LinkedIn →
+                <a href="https://www.linkedin.com/in/leungsean" target="_blank" rel="noopener" class="footer-connect-btn">
+                    <span>Connect on LinkedIn</span>
+                    <span>↗</span>
                 </a>
+            </div>
+            <div class="mt-20 pt-8 border-t border-black/15 flex flex-col sm:flex-row justify-between items-center text-[11px] font-bold uppercase tracking-[0.2em] text-black/50 gap-4">
+                <span>© 2026 SEAN LEUNG. ALL RIGHTS RESERVED.</span>
+                <span>HONG KONG SAR</span>
             </div>
         </div>
     </footer>
@@ -540,14 +746,19 @@
                     timeZone: 'Asia/Hong_Kong', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
                 });
                 document.getElementById('hkt-clock').textContent = `${hkt} HKT`;
-            } catch (e) { document.getElementById('hkt-clock').textContent = new Date().toLocaleTimeString(); }
+            } catch (e) { 
+                document.getElementById('hkt-clock').textContent = new Date().toLocaleTimeString(); 
+            }
         }
-        setInterval(updateHKT, 1000); updateHKT();
+        setInterval(updateHKT, 1000); 
+        updateHKT();
 
-        const obs = new IntersectionObserver((es) => { 
-            es.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); }); 
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal, .focus-reveal-2s').forEach(el => obs.observe(el));
+        const obs = new IntersectionObserver((entries) => { 
+            entries.forEach(entry => { 
+                if (entry.isIntersecting) entry.target.classList.add('active'); 
+            }); 
+        }, { threshold: 0.08 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     </script>
 </body>
 </html>
